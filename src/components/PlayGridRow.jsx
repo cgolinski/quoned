@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PlayGridCell from './PlayGridCell.jsx';
 
+var PlayGridRowStyle = {
+
+};
+
 class PlayGridRow extends Component {
   render() {
     return (
-      <tr>
+      <tr style={PlayGridRowStyle}>
         {this.renderColumns()}
       </tr>
     );

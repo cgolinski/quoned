@@ -3,7 +3,7 @@ import PlayGridRow from './PlayGridRow.jsx';
 
 
 var PlayGridStyle = {
-
+  borderCollapse: "collapse", 
 };
 
 class PlayGrid extends Component {
