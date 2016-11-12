@@ -7,6 +7,10 @@ var PlayGridStyle = {
 };
 
 class PlayGrid extends Component {
+  static propTypes = {
+    letters: React.PropTypes.array.isRequired
+  };
+
   render() {
     return (
       <table style={PlayGridStyle}>
@@ -19,14 +23,16 @@ class PlayGrid extends Component {
 
   renderRows() {
     var rows = [];
-    for (var i = 0; i < this.props.rows; i++) {
+    for (var i = 0; i < this.props.letters.length; i++) {
       rows.push(
-        <PlayGridRow columns={this.props.columns} />
+        <PlayGridRow key={i} letters={this.props.letters[i]} />
       );  
     }
+    console.log(rows);
     return rows;
   } 
 }
+
 
 
 

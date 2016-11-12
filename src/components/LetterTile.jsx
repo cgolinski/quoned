@@ -13,18 +13,21 @@ var LetterTileStyle = {
   borderRadius: "4px",
   textShadow: "0px 1px 0px white",
   boxShadow: "inset 1px 1px 3px #ffffd0, inset -1px -1px 3px #d3ca94",
-
-
 };
 
 class LetterTile extends Component {
+  static propTypes = {
+    letters: React.PropTypes.string
+  };
+
   render() {
     return (
         <span style={LetterTileStyle}>
-          {this.props.letter}
+          {this.props.letters}
         </span>
     );
   }
+
 }
 
 export default LetterTile;
