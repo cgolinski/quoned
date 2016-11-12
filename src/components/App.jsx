@@ -18,9 +18,9 @@ function create2DArray(rowCount, colCount){
   return rows;
 }
 
-const allLetters = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
+const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
 
-var letterPile = allLetters.split('');
+var letterPile = ALL_LETTERS.split('');
 console.log('letterPile: ' + letterPile + ' length: ' + letterPile.length);
 
 function selectRandomNumber(min, max) {
@@ -66,11 +66,22 @@ var StagingAreaStyle = {
   display: 'inline-block',
 };
 
+const NUMBER_OF_STARTING_TILES = {
+  onePlayer   : 21,
+  twoPlayers  : 21,
+  threePlayers: 21,
+  fourPlayers : 21,
+  fivePlayers : 15,
+  sixPlayers  : 15,
+  sevenPlayers: 11,
+  eightPlayers: 11
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
 
-    var stagingStartingTiles = createStartingHand(21);
+    var stagingStartingTiles = createStartingHand(NUMBER_OF_STARTING_TILES.onePlayer);
 
     this.state = {
       gridLetters: create2DArray(rowCount, colCount),
