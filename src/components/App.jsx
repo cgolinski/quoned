@@ -6,49 +6,49 @@ var rowCount = 10;
 var colCount = 10;
 
 function create2DArray(rowCount, colCount){
-  var rows=[];
+  var rows = [];
   
-  for(var i=0; i<rowCount; i++){
+  for(var i = 0; i < rowCount; i++){
     rows.push([]); 
   
-    for(var j=0; j<colCount; j++){
+    for(var j = 0; j < colCount; j++){
       rows[i].push(undefined);
     }
   }
   return rows;
 }
 
-const allLetters = "aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz";
+const allLetters = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
 
 var letterPile = allLetters.split('');
-console.log("letterPile: " + letterPile + " length: " + letterPile.length);
+console.log('letterPile: ' + letterPile + ' length: ' + letterPile.length);
 
 function selectRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min)
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 function selectRandomTile(setOfTilesMin, setOfTilesMax) {
-    return selectRandomNumber(setOfTilesMin, setOfTilesMax)
+  return selectRandomNumber(setOfTilesMin, setOfTilesMax);
 }
 
 function createStartingHand(number) {
   var startingHand = [];
   
-  for (var i=0; i<number; i++) {
+  for (var i = 0; i < number; i++) {
     var selectedTile = selectRandomTile(0, letterPile.length);
 
     startingHand.push(letterPile[selectedTile]);
     letterPile.splice(selectedTile, 1);
   }
   
-  console.log("startingHand: " + startingHand + " length: " + startingHand.length);
-  console.log("letterPile: " + letterPile + " length: " + letterPile.length);
+  console.log('startingHand: ' + startingHand + ' length: ' + startingHand.length);
+  console.log('letterPile: ' + letterPile + ' length: ' + letterPile.length);
   return startingHand;
 }
 
 function fill2DArray(array, values){
-  for(var row=0; row<array.length; row++){  
-    for(var cell=0; cell<array[row].length; cell++){
+  for(var row = 0; row < array.length; row++){  
+    for(var cell = 0; cell < array[row].length; cell++){
       if (array[row][cell] === undefined) {
         array[row][cell] = values.shift();
       }
@@ -58,12 +58,12 @@ function fill2DArray(array, values){
 }
 
 var PlayingAreaStyle = {
-  display: "inline-block",
-  marginRight: "300px",
+  display: 'inline-block',
+  marginRight: '300px',
 };
 
 var StagingAreaStyle = {
-  display: "inline-block",
+  display: 'inline-block',
 };
 
 class App extends Component {
