@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PlayGridRow from './PlayGridRow.jsx';
 
-
 var PlayGridStyle = {
   borderCollapse: "collapse", 
 };
@@ -28,12 +27,8 @@ class PlayGrid extends Component {
         <PlayGridRow key={i} letters={this.props.letters[i]} />
       );  
     }
-    console.log(rows);
     return rows;
   } 
 }
-
-
-
 
 export default PlayGrid;

@@ -23,7 +23,7 @@ class PlayGridCell extends Component {
     return (
       <td style={PlayGridCellStyle}>
         <span style={LetterStyle}>
-          <LetterTile letters={this.props.letters} />
+          <LetterTile letter={this.props.letters} />
         </span>
       </td>
     );

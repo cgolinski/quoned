@@ -17,17 +17,16 @@ var LetterTileStyle = {
 
 class LetterTile extends Component {
   static propTypes = {
-    letters: React.PropTypes.string
+    letter: React.PropTypes.string
   };
 
   render() {
     return (
-        <span style={LetterTileStyle}>
-          {this.props.letters}
-        </span>
+      <span style={LetterTileStyle}>
+        {this.props.letter}
+      </span>
     );
   }
-
 }
 
 export default LetterTile;

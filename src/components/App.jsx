@@ -2,31 +2,33 @@ import React, { Component } from 'react';
 import MenuBar from './MenuBar.jsx' ;
 import PlayGrid from './PlayGrid.jsx' ;
 
-const ROWS = 10;
-const COLS = 10;
+var rowCount = 10;
+var colCount = 10;
 
-
-function create2DArray(ROWS, COLS){
+function create2DArray(rowCount, colCount){
   var rows=[];
   
-  for(var i=0; i<ROWS; i++){
+  for(var i=0; i<rowCount; i++){
     rows.push([]); 
   
-    for(var j=0; j<COLS; j++){
+    for(var j=0; j<colCount; j++){
       rows[i].push(undefined);
     }
   }
   return rows;
 }
 
-
 const allLetters = "aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz";
 
 var letterPile = allLetters.split('');
 console.log("letterPile: " + letterPile + " length: " + letterPile.length);
 
+function selectRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
 function selectRandomTile(setOfTilesMin, setOfTilesMax) {
-  return Math.floor(Math.random() * (setOfTilesMax - setOfTilesMin) + setOfTilesMin)
+    return selectRandomNumber(setOfTilesMin, setOfTilesMax)
 }
 
 function createStartingHand(number) {
@@ -34,7 +36,6 @@ function createStartingHand(number) {
   
   for (var i=0; i<number; i++) {
     var selectedTile = selectRandomTile(0, letterPile.length);
-    console.log("selectedTile: " + selectedTile);
 
     startingHand.push(letterPile[selectedTile]);
     letterPile.splice(selectedTile, 1);
@@ -42,7 +43,7 @@ function createStartingHand(number) {
   
   console.log("startingHand: " + startingHand + " length: " + startingHand.length);
   console.log("letterPile: " + letterPile + " length: " + letterPile.length);
-  return(startingHand);
+  return startingHand;
 }
 
 function fill2DArray(array, values){
@@ -72,8 +73,8 @@ class App extends Component {
     var stagingStartingTiles = createStartingHand(21);
 
     this.state = {
-      gridLetters: create2DArray(ROWS, COLS),
-      startingLetters: fill2DArray(create2DArray(10, 10), stagingStartingTiles)
+      gridLetters: create2DArray(rowCount, colCount),
+      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles)
     };
   }
 
