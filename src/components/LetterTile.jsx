@@ -22,7 +22,7 @@ class LetterTile extends Component {
 
   render() {
     return (
-      <span style={LetterTileStyle}>
+      <span style={LetterTileStyle} onClick={this.props.onClick}>
         {this.props.letter}
       </span>
     );

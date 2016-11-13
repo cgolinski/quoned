@@ -85,20 +85,42 @@ class App extends Component {
 
     this.state = {
       gridLetters: create2DArray(rowCount, colCount),
-      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles)
+      startingCell: undefined, 
+      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles),
     };
   }
 
+  selectCell(row, column) {
+    if (this.state.startingCell !== undefined) {
+      if (this.state.startingLetters[row][column] === undefined) {
+        this.state.startingLetters[row][column] = this.state.startingLetters[this.state.startingCell.row][this.state.startingCell.column];
+        this.state.startingLetters[this.state.startingCell.row][this.state.startingCell.column] = undefined;
+        this.setState({
+          startingCell: undefined,
+          startingLetters: this.state.startingLetters,
+        });
+      }
+    } else if (this.state.startingCell === undefined && this.state.startingLetters[row][column] !== undefined) {
+      this.setState({
+        startingCell: {
+          row: row,
+          column: column,
+        }
+      });
+    }
+  }
+
   render() {
+    console.log('selected cell', this.state.startingCell);
     return (
       <div>
         <MenuBar>
         </MenuBar>
         <div style={PlayingAreaStyle}>
-          <PlayGrid id="playingArea" letters={this.state.gridLetters}/>
+          <PlayGrid id="playingArea" letters={this.state.gridLetters} selectCell={this.selectCell.bind(this)} />
         </div>
         <div style={StagingAreaStyle}>
-          <PlayGrid id="stagingArea" letters={this.state.startingLetters}/>
+          <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
         </div>
       </div>
 
