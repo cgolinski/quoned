@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import LetterTile from './LetterTile.jsx';
 
-var LetterPileStyle = {
+var LetterPileInfoStyle = {
   
 };
 
-class LetterPile extends Component {
+class LetterPileInfo extends Component {
   static propTypes = {
-    letters: React.PropTypes.array.isRequired,
+    letters: React.PropTypes.object.isRequired,
     peel: React.PropTypes.func.isRequired,
     //numberOfPlayers: React.PropTypes.number.isRequired
   };
@@ -21,4 +21,4 @@ class LetterPile extends Component {
   }
 }
 
-export default LetterPile;
+export default LetterPileInfo;

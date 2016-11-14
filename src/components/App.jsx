@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import MenuBar from './MenuBar.jsx' ;
 import PlayGrid from './PlayGrid.jsx' ;
-import LetterPile from './LetterPile.jsx' ;
+import LetterPileInfo from './LetterPileInfo.jsx' ;
+import LetterPile from '../model/LetterPile.js' ;
 
 
 var rowCount = 10;
@@ -21,27 +22,16 @@ function create2DArray(rowCount, colCount){
 }
 
 const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
+var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
-var letterPile = ALL_LETTERS.split('');
-console.log('letterPile: ' + letterPile + ' length: ' + letterPile.length);
 
+//To Do: Delete this function
 function selectRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
 function createStartingHand(number) {
-  var startingHand = [];
-  
-  for (var i = 0; i < number; i++) {
-    var selectedTile = selectRandomNumber(0, letterPile.length);
-
-    startingHand.push(letterPile[selectedTile]);
-    letterPile.splice(selectedTile, 1);
-  }
-  
-  console.log('startingHand: ' + startingHand + ' length: ' + startingHand.length);
-  console.log('letterPile: ' + letterPile + ' length: ' + letterPile.length);
-  return startingHand;
+  return letterPile.peel(number);
 }
 
 function fill2DArray(array, values){
@@ -113,16 +103,11 @@ class App extends Component {
   }
 
   peel() {
-    var randomNum = selectRandomNumber(0, letterPile.length)
-    var peeledTile = letterPile[randomNum];
-    letterPile.splice(randomNum, 1);
-
-    fill2DArray(this.state.startingLetters, [peeledTile]);
+    fill2DArray(this.state.startingLetters, letterPile.peel(1));
 
     this.setState({
       startingLetters: this.state.startingLetters,
     });
-    console.log(letterPile.length);
 
     //if (letterPile.length < numberOfPlayers) {
     //  this.value = "Bananas"
@@ -142,7 +127,7 @@ class App extends Component {
           <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
         </div>
         <div>
-          <LetterPile letters={letterPile} peel={this.peel.bind(this)} />
+          <LetterPileInfo letters={letterPile} peel={this.peel.bind(this)} />
         </div>
       </div>
 
