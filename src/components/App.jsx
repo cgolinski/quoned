@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MenuBar from './MenuBar.jsx' ;
 import PlayGrid from './PlayGrid.jsx' ;
+import LetterPile from './LetterPile.jsx' ;
+
 
 var rowCount = 10;
 var colCount = 10;
@@ -27,15 +29,11 @@ function selectRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function selectRandomTile(setOfTilesMin, setOfTilesMax) {
-  return selectRandomNumber(setOfTilesMin, setOfTilesMax);
-}
-
 function createStartingHand(number) {
   var startingHand = [];
   
   for (var i = 0; i < number; i++) {
-    var selectedTile = selectRandomTile(0, letterPile.length);
+    var selectedTile = selectRandomNumber(0, letterPile.length);
 
     startingHand.push(letterPile[selectedTile]);
     letterPile.splice(selectedTile, 1);
@@ -47,10 +45,14 @@ function createStartingHand(number) {
 }
 
 function fill2DArray(array, values){
+  row_loop: 
   for(var row = 0; row < array.length; row++){  
     for(var cell = 0; cell < array[row].length; cell++){
       if (array[row][cell] === undefined) {
         array[row][cell] = values.shift();
+        if (values.length === 0) {
+          break row_loop;
+        }
       }
     }
   }
@@ -110,6 +112,23 @@ class App extends Component {
     }
   }
 
+  peel() {
+    var randomNum = selectRandomNumber(0, letterPile.length)
+    var peeledTile = letterPile[randomNum];
+    letterPile.splice(randomNum, 1);
+
+    fill2DArray(this.state.startingLetters, [peeledTile]);
+
+    this.setState({
+      startingLetters: this.state.startingLetters,
+    });
+    console.log(letterPile.length);
+
+    //if (letterPile.length < numberOfPlayers) {
+    //  this.value = "Bananas"
+    //}
+  }
+
   render() {
     console.log('selected cell', this.state.startingCell);
     return (
@@ -121,6 +140,9 @@ class App extends Component {
         </div>
         <div style={StagingAreaStyle}>
           <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
+        </div>
+        <div>
+          <LetterPile letters={letterPile} peel={this.peel.bind(this)} />
         </div>
       </div>
 
