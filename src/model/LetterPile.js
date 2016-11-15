@@ -5,6 +5,10 @@ class LetterPile {
 		this._letters = shuffle(letters);
 	}
 
+	count() {
+		return this._letters.length;
+	}
+
 	peel(numberOfLettersToPeel) {
 		return this._letters.splice(0, numberOfLettersToPeel);
 	}
