@@ -1,61 +1,26 @@
 import React, { Component } from 'react';
-import MenuBar from './MenuBar.jsx' ;
-import PlayGrid from './PlayGrid.jsx' ;
-import LetterPileInfo from './LetterPileInfo.jsx' ;
-import LetterPile from '../model/LetterPile.js' ;
-
+import MenuBar from './MenuBar.jsx';
+import PlayGrid from './PlayGrid.jsx';
+import LetterPileInfo from './LetterPileInfo.jsx';
+import LetterPile from '../model/LetterPile.js';
+import {createStartingHand} from '../helpers/letters.js';
+import {create2DArray} from '../helpers/array.js';
+import {fill2DArray} from '../helpers/array.js';
 
 var rowCount = 10;
 var colCount = 10;
 
-function create2DArray(rowCount, colCount){
-  var rows = [];
-  
-  for(var i = 0; i < rowCount; i++){
-    rows.push([]); 
-  
-    for(var j = 0; j < colCount; j++){
-      rows[i].push(undefined);
-    }
-  }
-  return rows;
-}
-
 const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
 var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
-
-//To Do: Delete this function
-function selectRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-function createStartingHand(number) {
-  return letterPile.peel(number);
-}
-
-function fill2DArray(array, values){
-  row_loop: 
-  for(var row = 0; row < array.length; row++){  
-    for(var cell = 0; cell < array[row].length; cell++){
-      if (array[row][cell] === undefined) {
-        array[row][cell] = values.shift();
-        if (values.length === 0) {
-          break row_loop;
-        }
-      }
-    }
-  }
-  return array;
-}
-
-var PlayingAreaStyle = {
-  display: 'inline-block',
-  marginRight: '300px',
-};
-
-var StagingAreaStyle = {
-  display: 'inline-block',
+const css = {
+  playingArea: {
+    display: 'inline-block',
+    marginRight: '300px',
+  },
+  stagingArea: {
+    display: 'inline-block',
+  },
 };
 
 const NUMBER_OF_STARTING_TILES = {
@@ -67,13 +32,13 @@ const NUMBER_OF_STARTING_TILES = {
   sixPlayers  : 15,
   sevenPlayers: 11,
   eightPlayers: 11
-}
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    var stagingStartingTiles = createStartingHand(NUMBER_OF_STARTING_TILES.onePlayer);
+    var stagingStartingTiles = createStartingHand(NUMBER_OF_STARTING_TILES.onePlayer, letterPile);
 
     this.state = {
       gridLetters: create2DArray(rowCount, colCount),
@@ -120,10 +85,10 @@ class App extends Component {
       <div>
         <MenuBar>
         </MenuBar>
-        <div style={PlayingAreaStyle}>
+        <div style={css.playingArea}>
           <PlayGrid id="playingArea" letters={this.state.gridLetters} selectCell={this.selectCell.bind(this)} />
         </div>
-        <div style={StagingAreaStyle}>
+        <div style={css.stagingArea}>
           <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
         </div>
         <div>

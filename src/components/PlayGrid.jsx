@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PlayGridRow from './PlayGridRow.jsx';
 
-var PlayGridStyle = {
-  borderCollapse: "collapse", 
+const css = {
+  playGrid: {
+    borderCollapse: 'collapse', 
+  },
 };
 
 class PlayGrid extends Component {
@@ -12,7 +14,7 @@ class PlayGrid extends Component {
 
   render() {
     return (
-      <table style={PlayGridStyle}>
+      <table style={css.playGrid}>
         <tbody>
           {this.renderRows()}
         </tbody>

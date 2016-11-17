@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import LetterTile from './LetterTile.jsx';
 
-var LetterPileInfoStyle = {
-  
-};
-
 class LetterPileInfo extends Component {
   static propTypes = {
     letters: React.PropTypes.object.isRequired,
