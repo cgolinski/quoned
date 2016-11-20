@@ -18,7 +18,7 @@ class PlayGridRow extends Component {
     var columns = [];
     for (var i = 0; i < this.props.letters.length; i++) {
       columns.push(
-        <PlayGridCell key={i} letters={this.props.letters[i]} />
+        <PlayGridCell key={i} letters={this.props.letters[i]} selectCell={this.props.selectCell.bind(null, i)} />
       );
     }
 

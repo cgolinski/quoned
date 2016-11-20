@@ -1,104 +1,96 @@
 import React, { Component } from 'react';
-import MenuBar from './MenuBar.jsx' ;
-import PlayGrid from './PlayGrid.jsx' ;
+import MenuBar from './MenuBar.jsx';
+import PlayGrid from './PlayGrid.jsx';
+import LetterPile from '../model/LetterPile.js';
+import {createStartingHand} from '../helpers/letters.js';
+import {create2DArray} from '../helpers/array.js';
+import {fill2DArray} from '../helpers/array.js';
 
 var rowCount = 10;
 var colCount = 10;
 
-function create2DArray(rowCount, colCount){
-  var rows = [];
-  
-  for(var i = 0; i < rowCount; i++){
-    rows.push([]); 
-  
-    for(var j = 0; j < colCount; j++){
-      rows[i].push(undefined);
-    }
-  }
-  return rows;
-}
-
 const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
+var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
-var letterPile = ALL_LETTERS.split('');
-console.log('letterPile: ' + letterPile + ' length: ' + letterPile.length);
-
-function selectRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-function selectRandomTile(setOfTilesMin, setOfTilesMax) {
-  return selectRandomNumber(setOfTilesMin, setOfTilesMax);
-}
-
-function createStartingHand(number) {
-  var startingHand = [];
-  
-  for (var i = 0; i < number; i++) {
-    var selectedTile = selectRandomTile(0, letterPile.length);
-
-    startingHand.push(letterPile[selectedTile]);
-    letterPile.splice(selectedTile, 1);
-  }
-  
-  console.log('startingHand: ' + startingHand + ' length: ' + startingHand.length);
-  console.log('letterPile: ' + letterPile + ' length: ' + letterPile.length);
-  return startingHand;
-}
-
-function fill2DArray(array, values){
-  for(var row = 0; row < array.length; row++){  
-    for(var cell = 0; cell < array[row].length; cell++){
-      if (array[row][cell] === undefined) {
-        array[row][cell] = values.shift();
-      }
-    }
-  }
-  return array;
-}
-
-var PlayingAreaStyle = {
-  display: 'inline-block',
-  marginRight: '300px',
+const css = {
+  stagingArea: {
+    display: 'inline-block',
+    marginLeft: '10%',
+  },
 };
 
-var StagingAreaStyle = {
-  display: 'inline-block',
-};
+var numOfPlayers = 4;
 
 const NUMBER_OF_STARTING_TILES = {
-  onePlayer   : 21,
-  twoPlayers  : 21,
-  threePlayers: 21,
-  fourPlayers : 21,
-  fivePlayers : 15,
-  sixPlayers  : 15,
-  sevenPlayers: 11,
-  eightPlayers: 11
+  1: 21,
+  2: 21,
+  3: 21,
+  4: 21,
+  5: 15,
+  6: 15,
+  7: 11,
+  8: 11
+};
+
+function startingTilesPerPlayer(numOfPlayers) {
+  return NUMBER_OF_STARTING_TILES[numOfPlayers];
 }
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    var stagingStartingTiles = createStartingHand(NUMBER_OF_STARTING_TILES.onePlayer);
+    var stagingStartingTiles = createStartingHand(startingTilesPerPlayer(numOfPlayers), letterPile);
 
     this.state = {
       gridLetters: create2DArray(rowCount, colCount),
-      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles)
+      nextPeelWins: false,
+      startingCell: undefined, 
+      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles),
     };
   }
 
+  selectCell(row, column) {
+    if (this.state.startingCell !== undefined) {
+      if (this.state.startingLetters[row][column] === undefined) {
+        this.state.startingLetters[row][column] = this.state.startingLetters[this.state.startingCell.row][this.state.startingCell.column];
+        this.state.startingLetters[this.state.startingCell.row][this.state.startingCell.column] = undefined;
+        this.setState({
+          startingCell: undefined,
+          startingLetters: this.state.startingLetters,
+        });
+      }
+    } else if (this.state.startingCell === undefined && this.state.startingLetters[row][column] !== undefined) {
+      this.setState({
+        startingCell: {
+          row: row,
+          column: column,
+        }
+      });
+    }
+  }
+
+  peel() {
+    fill2DArray(this.state.startingLetters, letterPile.peel(1));
+
+    this.setState({
+      startingLetters: this.state.startingLetters,
+      nextPeelWins: letterPile.count() < numOfPlayers,
+    });
+  }
+
+  bananas() {
+    this.peel();
+  }
+
   render() {
+    console.table(this.state.startingLetters);
+    console.log('selected cell', this.state.startingCell);
     return (
       <div>
-        <MenuBar>
-        </MenuBar>
-        <div style={PlayingAreaStyle}>
-          <PlayGrid id="playingArea" letters={this.state.gridLetters}/>
-        </div>
-        <div style={StagingAreaStyle}>
-          <PlayGrid id="stagingArea" letters={this.state.startingLetters}/>
+        <MenuBar letters={letterPile} nextPeelWins={this.state.nextPeelWins} peel={this.peel.bind(this)} bananas={this.bananas.bind(this)}/>
+        <div style={css.stagingArea}>
+          <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
         </div>
       </div>
 
