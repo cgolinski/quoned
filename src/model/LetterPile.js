@@ -2,7 +2,7 @@ const shuffle = require('lodash/shuffle');
 
 class LetterPile {
 	constructor(letters) {
-		this._letters = shuffle(letters);
+		this._letters = shuffle(letters).slice(0,30);
 	}
 
 	count() {

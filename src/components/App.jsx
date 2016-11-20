@@ -23,25 +23,32 @@ const css = {
   },
 };
 
+var numOfPlayers = 4;
+
 const NUMBER_OF_STARTING_TILES = {
-  onePlayer   : 21,
-  twoPlayers  : 21,
-  threePlayers: 21,
-  fourPlayers : 21,
-  fivePlayers : 15,
-  sixPlayers  : 15,
-  sevenPlayers: 11,
-  eightPlayers: 11
+  1: 21,
+  2: 21,
+  3: 21,
+  4: 21,
+  5: 15,
+  6: 15,
+  7: 11,
+  8: 11
 };
+
+function startingTilesPerPlayer(numOfPlayers) {
+  return NUMBER_OF_STARTING_TILES[numOfPlayers];
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    var stagingStartingTiles = createStartingHand(NUMBER_OF_STARTING_TILES.onePlayer, letterPile);
+    var stagingStartingTiles = createStartingHand(startingTilesPerPlayer(numOfPlayers), letterPile);
 
     this.state = {
       gridLetters: create2DArray(rowCount, colCount),
+      nextPeelWins: false,
       startingCell: undefined, 
       startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles),
     };
@@ -72,14 +79,16 @@ class App extends Component {
 
     this.setState({
       startingLetters: this.state.startingLetters,
+      nextPeelWins: letterPile.count() < numOfPlayers,
     });
+  }
 
-    //if (letterPile.length < numberOfPlayers) {
-    //  this.value = "Bananas"
-    //}
+  bananas() {
+    this.peel();
   }
 
   render() {
+    console.table(this.state.startingLetters);
     console.log('selected cell', this.state.startingCell);
     return (
       <div>
@@ -92,7 +101,7 @@ class App extends Component {
           <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
         </div>
         <div>
-          <LetterPileInfo letters={letterPile} peel={this.peel.bind(this)} />
+          <LetterPileInfo letters={letterPile} nextPeelWins={this.state.nextPeelWins} peel={this.peel.bind(this)} bananas={this.bananas.bind(this)} />
         </div>
       </div>
 
