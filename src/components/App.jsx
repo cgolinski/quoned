@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MenuBar from './MenuBar.jsx';
 import PlayGrid from './PlayGrid.jsx';
-import LetterPileInfo from './LetterPileInfo.jsx';
 import LetterPile from '../model/LetterPile.js';
 import {createStartingHand} from '../helpers/letters.js';
 import {create2DArray} from '../helpers/array.js';
@@ -14,12 +13,9 @@ const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiii
 var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
 const css = {
-  playingArea: {
-    display: 'inline-block',
-    marginRight: '300px',
-  },
   stagingArea: {
     display: 'inline-block',
+    marginLeft: '10%',
   },
 };
 
@@ -92,16 +88,9 @@ class App extends Component {
     console.log('selected cell', this.state.startingCell);
     return (
       <div>
-        <MenuBar>
-        </MenuBar>
-        <div style={css.playingArea}>
-          <PlayGrid id="playingArea" letters={this.state.gridLetters} selectCell={this.selectCell.bind(this)} />
-        </div>
+        <MenuBar letters={letterPile} nextPeelWins={this.state.nextPeelWins} peel={this.peel.bind(this)} bananas={this.bananas.bind(this)}/>
         <div style={css.stagingArea}>
           <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
-        </div>
-        <div>
-          <LetterPileInfo letters={letterPile} nextPeelWins={this.state.nextPeelWins} peel={this.peel.bind(this)} bananas={this.bananas.bind(this)} />
         </div>
       </div>
 
