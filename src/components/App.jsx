@@ -50,6 +50,12 @@ class App extends Component {
     };
   }
 
+  /*
+  To Do:
+  Refactor selectCell function to make more sense. 
+  Maybe split out beginning cell from ending cell.
+  */
+
   selectCell(row, column) {
     if (this.state.startingCell !== undefined) {
       if (this.state.startingLetters[row][column] === undefined) {
@@ -93,7 +99,6 @@ class App extends Component {
           <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
         </div>
       </div>
-
     );
   }
 }

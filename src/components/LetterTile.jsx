@@ -17,12 +17,13 @@ var LetterTileStyle = {
 
 class LetterTile extends Component {
   static propTypes = {
-    letter: React.PropTypes.string
+    letter: React.PropTypes.string,
+    onDragStart: React.PropTypes.func,
   };
 
   render() {
     return (
-      <span style={LetterTileStyle} onClick={this.props.onClick}>
+      <span style={LetterTileStyle} draggable="true" onDragStart={this.props.selectCell}>
         {this.props.letter}
       </span>
     );

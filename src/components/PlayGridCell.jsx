@@ -17,15 +17,31 @@ const css = {
 
 class PlayGridCell extends Component {
   static propTypes = {
-    letters: React.PropTypes.string
+    letter: React.PropTypes.string
   };
+
+  dropHandler(event) {
+    event.preventDefault();
+    this.props.selectCell();
+    console.log('Dropped!');
+  }
+
+  dragOverHandler(event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+    console.log('Drag Over Handler!');
+  }
 
   render() {
     return (
-      <td style={css.playGridCell}>
-        <span style={css.letter}>
-          <LetterTile letter={this.props.letters} onClick={this.props.selectCell} />
-        </span>
+      <td style={css.playGridCell} onDrop={this.dropHandler.bind(this)} onDragOver={this.dragOverHandler.bind(this)}>
+        {this.props.letter === undefined ? null : 
+          <span style={css.letter}>
+            <LetterTile letter={this.props.letter}
+                        selectCell={this.props.selectCell}
+            />
+          </span> 
+        }
       </td>
     );
   }
