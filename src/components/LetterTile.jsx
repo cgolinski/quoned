@@ -23,7 +23,7 @@ class LetterTile extends Component {
 
   render() {
     return (
-      <span style={LetterTileStyle} draggable="true" onDragStart={this.props.selectCell}>
+      <span style={LetterTileStyle} draggable="true" onDragStart={this.props.dragTile}>
         {this.props.letter}
       </span>
     );

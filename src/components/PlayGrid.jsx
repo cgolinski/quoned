@@ -9,7 +9,7 @@ const css = {
 
 class PlayGrid extends Component {
   static propTypes = {
-    letters: React.PropTypes.array.isRequired
+    letters: React.PropTypes.array.isRequired,
   };
 
   render() {
@@ -26,7 +26,7 @@ class PlayGrid extends Component {
     var rows = [];
     for (var i = 0; i < this.props.letters.length; i++) {
       rows.push(
-        <PlayGridRow key={i} letters={this.props.letters[i]} selectCell={this.props.selectCell.bind(null, i)} />
+        <PlayGridRow key={i} letters={this.props.letters[i]} dragTile={this.props.dragTile.bind(null, i)} dropTile={this.props.dropTile.bind(null, i)} />
       );  
     }
     return rows;

@@ -45,36 +45,74 @@ class App extends Component {
     this.state = {
       gridLetters: create2DArray(rowCount, colCount),
       nextPeelWins: false,
-      startingCell: undefined, 
+      originCell: undefined,
       startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles),
     };
   }
 
-  /*
-  To Do:
-  Refactor selectCell function to make more sense. 
-  Maybe split out beginning cell from ending cell.
-  */
+  //------Refactoring section------
+  dragTile(row, column) {
+    this.setState({
+      originCell: {
+        row: row,
+        column: column,
+      }
+    });
+  }
 
+  dropTile(row, column) {
+    var letterInDestinationCell = this.state.startingLetters[row][column];
+    var destinationCellIsEmpty = letterInDestinationCell === undefined;
+    var originCell = this.state.originCell;
+    var letterInOriginCell = this.state.startingLetters[originCell.row][originCell.column];
+
+
+    //PROBLEMS: 
+    // 1) Updating pointer variables, not original state. How to update original state
+    //    so tile actually moves, while keeping function readable?
+    // 2) Plus sign briefly flashes as tile starts being dragged.
+
+
+    if (destinationCellIsEmpty) {
+      //then put the letter in state into the destination cell
+      letterInDestinationCell = letterInOriginCell;
+      //same as row above but directly updating state.
+      this.state.startingLetters[row][column] = letterInDestinationCell;
+      //and make the original cell empty
+      this.state.startingLetters[originCell.row][originCell.column] = undefined;
+      //run setState to refresh state
+      this.setState({
+        originCell: undefined,
+        startingLetters: this.state.startingLetters,
+      });
+    }
+  }
+
+
+  //------End of reactoring section------
+
+
+/*
   selectCell(row, column) {
-    if (this.state.startingCell !== undefined) {
+    if (this.state.selectedCell !== undefined) {
       if (this.state.startingLetters[row][column] === undefined) {
-        this.state.startingLetters[row][column] = this.state.startingLetters[this.state.startingCell.row][this.state.startingCell.column];
-        this.state.startingLetters[this.state.startingCell.row][this.state.startingCell.column] = undefined;
+        this.state.startingLetters[row][column] = this.state.startingLetters[this.state.selectedCell.row][this.state.selectedCell.column];
+        this.state.startingLetters[this.state.selectedCell.row][this.state.selectedCell.column] = undefined;
         this.setState({
-          startingCell: undefined,
+          selectedCell: undefined,
           startingLetters: this.state.startingLetters,
         });
       }
-    } else if (this.state.startingCell === undefined && this.state.startingLetters[row][column] !== undefined) {
+    } else if (this.state.selectedCell === undefined && this.state.startingLetters[row][column] !== undefined) {
       this.setState({
-        startingCell: {
+        selectedCell: {
           row: row,
           column: column,
         }
       });
     }
   }
+*/
 
   peel() {
     fill2DArray(this.state.startingLetters, letterPile.peel(1));
@@ -91,12 +129,12 @@ class App extends Component {
 
   render() {
     console.table(this.state.startingLetters);
-    console.log('selected cell', this.state.startingCell);
+    console.log('origin cell', this.state.originCell);
     return (
       <div>
         <MenuBar letters={letterPile} nextPeelWins={this.state.nextPeelWins} peel={this.peel.bind(this)} bananas={this.bananas.bind(this)}/>
         <div style={css.stagingArea}>
-          <PlayGrid id="stagingArea" letters={this.state.startingLetters} selectCell={this.selectCell.bind(this)} />
+          <PlayGrid id="stagingArea" letters={this.state.startingLetters} dragTile={this.dragTile.bind(this)} dropTile={this.dropTile.bind(this)} />
         </div>
       </div>
     );

@@ -17,17 +17,18 @@ const css = {
 
 class PlayGridCell extends Component {
   static propTypes = {
-    letter: React.PropTypes.string
+    letter: React.PropTypes.string,
+    dropTile: React.PropTypes.func.isRequired,
   };
 
   dropHandler(event) {
     event.preventDefault();
-    this.props.selectCell();
+    this.props.dropTile();
     console.log('Dropped!');
   }
 
   dragOverHandler(event) {
-    event.preventDefault();
+    event.preventDefault(); 
     event.dataTransfer.dropEffect = 'move';
     console.log('Drag Over Handler!');
   }
@@ -38,7 +39,7 @@ class PlayGridCell extends Component {
         {this.props.letter === undefined ? null : 
           <span style={css.letter}>
             <LetterTile letter={this.props.letter}
-                        selectCell={this.props.selectCell}
+                        dragTile={this.props.dragTile}
             />
           </span> 
         }
