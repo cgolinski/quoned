@@ -19,8 +19,6 @@ const css = {
   },
 };
 
-var numOfPlayers = 4;
-
 const NUMBER_OF_STARTING_TILES = {
   1: 21,
   2: 21,
@@ -40,15 +38,18 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    var stagingStartingTiles = createStartingHand(startingTilesPerPlayer(numOfPlayers), letterPile);
-
     this.state = {
       gridLetters: create2DArray(rowCount, colCount),
       nextPeelWins: false,
       originCell: undefined,
-      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles),
-    };
+      startingLetters: create2DArray(rowCount, colCount),
+      showStartingOptions: true,
+      showLetterPileInfo: false,
+      gameStarted: false,
+      numOfPlayers: null,
+    }; 
   }
+
 
   //------Refactoring section------
   dragTile(row, column) {
@@ -119,7 +120,7 @@ class App extends Component {
 
     this.setState({
       startingLetters: this.state.startingLetters,
-      nextPeelWins: letterPile.count() < numOfPlayers,
+      nextPeelWins: letterPile.count() < this.state.numOfPlayers,
     });
   }
 
@@ -127,12 +128,31 @@ class App extends Component {
     this.peel();
   }
 
+  startGame(data) {
+    console.log('start game button was clicked');
+
+    var stagingStartingTiles = createStartingHand(startingTilesPerPlayer(data.numOfPlayers), letterPile);
+
+    this.setState({
+      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles),
+      gameStarted: true,
+      numOfPlayers: data.numOfPlayers,
+    });
+
+  };
+
   render() {
     console.table(this.state.startingLetters);
     console.log('origin cell', this.state.originCell);
     return (
       <div>
-        <MenuBar letters={letterPile} nextPeelWins={this.state.nextPeelWins} peel={this.peel.bind(this)} bananas={this.bananas.bind(this)}/>
+        <MenuBar letters={letterPile} 
+                 nextPeelWins={this.state.nextPeelWins} 
+                 peel={this.peel.bind(this)} 
+                 bananas={this.bananas.bind(this)} 
+                 startGame={this.startGame.bind(this)} 
+                 gameStarted={this.state.gameStarted} 
+        />
         <div style={css.stagingArea}>
           <PlayGrid id="stagingArea" letters={this.state.startingLetters} dragTile={this.dragTile.bind(this)} dropTile={this.dropTile.bind(this)} />
         </div>

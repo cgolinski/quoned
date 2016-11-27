@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import LetterPileInfo from './LetterPileInfo.jsx';
+import StartingOptions from './StartingOptions.jsx';
 
 
-var MenuBarStyle = {
-  color: 'blue',
-  fontSize: '18px',
-  border: '1px solid black',
-  padding: '10px',
-  paddingBottom: '60px',
-  backgroundColor: 'orange',
-  display: 'block',
-  minWidth: '500px', 
-  width: '60%',
-  marginLeft: '50px',
-  marginBottom: '20px',
+var css = {
+  menuBar: {
+    color: 'blue',
+    fontSize: '18px',
+    border: '1px solid black',
+    padding: '10px',
+    paddingBottom: '60px',
+    backgroundColor: 'orange',
+    display: 'block',
+    minWidth: '500px', 
+    width: '60%',
+    marginLeft: '50px',
+    marginBottom: '20px',
+  },
+  hidden: {
+    display: 'none',
+  },
+  startingOptions: {
+    border: '1px solid black',
+  },
 };
 
 class MenuBar extends Component {
@@ -21,14 +30,18 @@ class MenuBar extends Component {
     letters: React.PropTypes.object.isRequired,
     peel: React.PropTypes.func.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
+    gameStarted: React.PropTypes.bool.isRequired,
   };
 
   render() {
     return (
-      <div style={MenuBarStyle}>
-        <LetterPileInfo letters={this.props.letters} nextPeelWins={this.props.nextPeelWins} peel={this.props.peel} bananas={this.props.bananas} />
+      <div style={css.menuBar}>
+        {
+          this.props.gameStarted
+          ? <LetterPileInfo style={css.hidden} letters={this.props.letters} nextPeelWins={this.props.nextPeelWins} peel={this.props.peel} bananas={this.props.bananas} /> 
+          : <StartingOptions style={css.startingOptions} startGame={this.props.startGame}/> 
+        }
       </div>
-
     );
   }
 }

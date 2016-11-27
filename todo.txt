@@ -1,0 +1,22 @@
+To Do
+
+Next feature: 
+dictionary
+npm library, <500K file because has to dwnld on user's comp
+words only, no defs
+binary search to find words
+Set has?
+
+- Connect to server
+- Create one board per player
+- Render small version of other players' boards in each player's view
+
+- Create beginning-of-game options: 
+	- special rules (two letter words allowed? timed? size of grid? number of tiles? pass unused tiles to neighbouring player?)
+	- single player (vs computer, with timer, auto-timed peels)
+	- themes (all words from certain category)
+
+- Create game over status when all tiles placed
+- Load dictionary
+- When game over, check all words are connected, all rules are in dictionary
+- 
