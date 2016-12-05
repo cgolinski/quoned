@@ -26,26 +26,40 @@ export function fill2DArray(array, values){
   return array;
 }
 
-export function findWord(startingLetters) {
+export function findWords(startingLetters) {
   var letters = startingLetters; 
   var numOfRows = letters.length;
   var numOfCols = letters[0].length;
   var word = '';
   var rowWords = [];
   var colWords = [];
+  var startingRow;
+  var startingCol;
   
   for (let row = 0; row < numOfRows; row++) {
     for (let col = 0; col < numOfCols; col++) {
       let cellLetter    = letters[row][col];
       let cellHasLetter = cellLetter !== undefined;
-      let isLastCell    = col === numOfCols;
+      let isLastCell    = col === numOfCols - 1;
 
       if (cellHasLetter) {
+        if (word === '') {
+          startingRow = row;
+          startingCol = col;
+        }
         word += cellLetter;
-      } else if (!cellHasLetter || isLastCell) {
+      }
+
+      if (!cellHasLetter || isLastCell) {
         let wordIsNotEmpty = word !== '';
         if (wordIsNotEmpty) {
-          rowWords.push(word);
+          rowWords.push({
+            word: word,
+            startingRow: startingRow, 
+            startingCol: startingCol,
+            endingRow: startingRow,
+            endingCol: startingCol + word.length - 1,
+          });
           word = '';
         }
       }
@@ -56,14 +70,25 @@ export function findWord(startingLetters) {
     for (let row = 0; row < numOfRows; row++) {
       let cellLetter    = letters[row][col];
       let cellHasLetter = cellLetter !== undefined;
-      let isLastCell    = row === numOfRows;
+      let isLastCell    = row === numOfRows - 1;
 
       if (cellHasLetter) {
+        if (word === '') {
+          startingRow = row;
+          startingCol = col;
+        }
         word += cellLetter;
-      } else if (!cellHasLetter || isLastCell) {
+      } 
+      if (!cellHasLetter || isLastCell) {
         let wordIsNotEmpty = word !== '';
         if (wordIsNotEmpty) {
-          colWords.push(word);
+          colWords.push({
+            word: word,
+            startingRow: startingRow, 
+            startingCol: startingCol,
+            endingRow: startingRow + word.length - 1,
+            endingCol: startingCol,
+          });
           word = '';
         }
       }
@@ -74,14 +99,32 @@ export function findWord(startingLetters) {
   return allWords;
 }
 
-/*
-export function checkWords (allWords) {
-  // takes in allWords as array of words
-  // loop through array
+export function checkWords (allWords, dictionary) {
   // if word is in dictionary, move onto next item in array
   // if word is not in dictionary, throw error to user (highlight word)
+  var notWords = [];
+  for (var i = 0; i < allWords.length; i++) {
+    if (!dictionary.has(allWords[i].word)) {
+      notWords.push(allWords[i]);
+    };
+  }
+  console.log('notWords: ', notWords);
+  return notWords;
 }
+
+/*
+TO DO
+  - in checkWords, make array of all words (and their coordinates) not in dictionary, and return it
+  - in new function called ...calculate? calculate all grid cells that will be highlighted 
+    (all points between startingRow/endingRow startingCol/endingCol). Returns 2d array
+  - refactor startingLetters to be gridData, containing objects instead of strings. 
+    Includes letter key for letter, highlight key true/false (false by default). This way can add for more rules later.
+  - Merge highlight data (from calculate function) into gridData highlight key. (this.state / setState to re-render)  
 */
+
+
+      
+
 
 /*
 function testFindWord(findWord) {

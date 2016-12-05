@@ -5,10 +5,9 @@ import LetterPile from '../model/LetterPile.js';
 import {createStartingHand} from '../helpers/letters.js';
 import {create2DArray} from '../helpers/array.js';
 import {fill2DArray} from '../helpers/array.js';
-import {findWord} from '../helpers/array.js';
+import {findWords} from '../helpers/array.js';
+import {checkWords} from '../helpers/array.js';
 import dictionary from '../model/dictionary.js';
-
-console.log('word', dictionary.has('yes'));
 
 var rowCount = 10;
 var colCount = 10;
@@ -120,14 +119,15 @@ class App extends Component {
 */
 
   peel() {
+    var allWords = findWords(this.state.startingLetters);
+    checkWords(allWords, dictionary);
+
     fill2DArray(this.state.startingLetters, letterPile.peel(1));
 
     this.setState({
       startingLetters: this.state.startingLetters,
       nextPeelWins: letterPile.count() < this.state.numOfPlayers,
     });
-
-    findWord(this.state.startingLetters);
   }
 
   bananas() {
