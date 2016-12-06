@@ -137,10 +137,12 @@ class App extends Component {
   startGame(data) {
     console.log('start game button was clicked');
 
-    var stagingStartingTiles = createStartingHand(startingTilesPerPlayer(data.numOfPlayers), letterPile);
+    var startingLetters_ = createStartingHand(startingTilesPerPlayer(data.numOfPlayers), letterPile);
+
+    // will need: new GridData(startingLetters), creates array and fills with CellData 
 
     this.setState({
-      startingLetters: fill2DArray(create2DArray(rowCount, colCount), stagingStartingTiles),
+      startingLetters: fill2DArray(create2DArray(rowCount, colCount), startingLetters_),
       gameStarted: true,
       numOfPlayers: data.numOfPlayers,
     });

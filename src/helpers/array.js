@@ -112,13 +112,24 @@ export function checkWords (allWords, dictionary) {
   return notWords;
 }
 
+export function calculate (startingLetters, notWords) {
+ for (var i = 0; i < notWords.length; i++) {
+  for (var j = notWords[i].startingRow; j < notWords[i].endingRow + 1; j++) {
+    for (var k = notWords[i].startingCol; k < notWords[i].endingCol +1; k++) {
+
+    }
+  }
+ }
+}
+
 /*
 TO DO
-  - in checkWords, make array of all words (and their coordinates) not in dictionary, and return it
-  - in new function called ...calculate? calculate all grid cells that will be highlighted 
-    (all points between startingRow/endingRow startingCol/endingCol). Returns 2d array
+  - DONE: in checkWords, make array of all words (and their coordinates) not in dictionary, and return it
   - refactor startingLetters to be gridData, containing objects instead of strings. 
     Includes letter key for letter, highlight key true/false (false by default). This way can add for more rules later.
+  - in new function called ...calculate? calculate all grid cells that will be highlighted 
+    (all points between startingRow/endingRow startingCol/endingCol). 
+    Modify startingLetters (aka gridData ?) 2d array
   - Merge highlight data (from calculate function) into gridData highlight key. (this.state / setState to re-render)  
 */
 
