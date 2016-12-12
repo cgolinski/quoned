@@ -1,11 +1,5 @@
-// set state showErrors. when first tile is moved, set state showErrors = false, and clear all cellData.error
-
-
-//import cell data into gridData. 
-
-//In GridData, fill2DArray with initial values (CellData?) same as in app.js. 
-//Newly initialized cellData objects
- 
+// set state showErrors. when first tile is moved after error shows, 
+// set state showErrors = false, and clear all cellData.error 
 
 const LETTER_EMPTY = undefined;
 

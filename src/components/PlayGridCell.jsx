@@ -17,7 +17,7 @@ const css = {
 
 class PlayGridCell extends Component {
   static propTypes = {
-    letter: React.PropTypes.string,
+    cellData: React.PropTypes.object,
     dropTile: React.PropTypes.func.isRequired,
   };
 
@@ -36,9 +36,9 @@ class PlayGridCell extends Component {
   render() {
     return (
       <td style={css.playGridCell} onDrop={this.dropHandler.bind(this)} onDragOver={this.dragOverHandler.bind(this)}>
-        {this.props.letter === undefined ? null : 
+        {this.props.cellData.letter === undefined ? null : 
           <span style={css.letter}>
-            <LetterTile letter={this.props.letter}
+            <LetterTile letter={this.props.cellData.letter}
                         dragTile={this.props.dragTile}
             />
           </span> 

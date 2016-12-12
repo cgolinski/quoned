@@ -8,6 +8,7 @@ import {fill2DArray} from '../helpers/array.js';
 import {findWords} from '../helpers/array.js';
 import {checkWords} from '../helpers/array.js';
 import dictionary from '../model/dictionary.js';
+import {createGridData, fillGridData} from '../model/GridData.js';
 
 var rowCount = 10;
 var colCount = 10;
@@ -42,10 +43,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      gridLetters: create2DArray(rowCount, colCount),
+      gridData: null,
       nextPeelWins: false,
       originCell: undefined,
-      startingLetters: create2DArray(rowCount, colCount),
       showStartingOptions: true,
       showLetterPileInfo: false,
       gameStarted: false,
@@ -53,8 +53,6 @@ class App extends Component {
     }; 
   }
 
-
-  //------Refactoring section------
   dragTile(row, column) {
     this.setState({
       originCell: {
@@ -65,67 +63,34 @@ class App extends Component {
   }
 
   dropTile(row, column) {
-    var letterInDestinationCell = this.state.startingLetters[row][column];
+    var letterInDestinationCell = this.state.gridData[row][column].letter;
     var destinationCellIsEmpty = letterInDestinationCell === undefined;
     var originCell = this.state.originCell;
-    var letterInOriginCell = this.state.startingLetters[originCell.row][originCell.column];
+    var letterInOriginCell = this.state.gridData[originCell.row][originCell.column].letter;
 
-
-    //PROBLEMS: 
-    // 1) Updating pointer variables, not original state. How to update original state
-    //    so tile actually moves, while keeping function readable?
-    // 2) Plus sign briefly flashes as tile starts being dragged.
-
+    /* PROBLEMS: 
+       1) Updating pointer variables, not original state. How to update original state
+          so tile actually moves, while keeping function readable?
+       2) Plus sign briefly flashes as tile starts being dragged.
+    */
 
     if (destinationCellIsEmpty) {
-      //then put the letter in state into the destination cell
       letterInDestinationCell = letterInOriginCell;
-      //same as row above but directly updating state.
-      this.state.startingLetters[row][column] = letterInDestinationCell;
-      //and make the original cell empty
-      this.state.startingLetters[originCell.row][originCell.column] = undefined;
-      //run setState to refresh state
+      this.state.gridData[row][column].letter = letterInDestinationCell;
+      this.state.gridData[originCell.row][originCell.column].letter = undefined;
       this.setState({
         originCell: undefined,
-        startingLetters: this.state.startingLetters,
+        gridData: this.state.gridData,
       });
     }
   }
-
-
-  //------End of reactoring section------
-
-
-/*
-  selectCell(row, column) {
-    if (this.state.selectedCell !== undefined) {
-      if (this.state.startingLetters[row][column] === undefined) {
-        this.state.startingLetters[row][column] = this.state.startingLetters[this.state.selectedCell.row][this.state.selectedCell.column];
-        this.state.startingLetters[this.state.selectedCell.row][this.state.selectedCell.column] = undefined;
-        this.setState({
-          selectedCell: undefined,
-          startingLetters: this.state.startingLetters,
-        });
-      }
-    } else if (this.state.selectedCell === undefined && this.state.startingLetters[row][column] !== undefined) {
-      this.setState({
-        selectedCell: {
-          row: row,
-          column: column,
-        }
-      });
-    }
-  }
-*/
 
   peel() {
-    var allWords = findWords(this.state.startingLetters);
+    var allWords = findWords(this.state.gridData);
     checkWords(allWords, dictionary);
 
-    fill2DArray(this.state.startingLetters, letterPile.peel(1));
-
     this.setState({
-      startingLetters: this.state.startingLetters,
+      gridData: fillGridData(this.state.gridData, letterPile.peel(1)),
       nextPeelWins: letterPile.count() < this.state.numOfPlayers,
     });
   }
@@ -137,21 +102,16 @@ class App extends Component {
   startGame(data) {
     console.log('start game button was clicked');
 
-    var startingLetters_ = createStartingHand(startingTilesPerPlayer(data.numOfPlayers), letterPile);
-
-    // will need: new GridData(startingLetters), creates array and fills with CellData 
+    var startingLetters = createStartingHand(startingTilesPerPlayer(data.numOfPlayers), letterPile);
 
     this.setState({
-      startingLetters: fill2DArray(create2DArray(rowCount, colCount), startingLetters_),
+      gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
       gameStarted: true,
       numOfPlayers: data.numOfPlayers,
     });
-
-  };
+  };  
 
   render() {
-    console.table(this.state.startingLetters);
-    console.log('origin cell', this.state.originCell);
     return (
       <div>
         <MenuBar letters={letterPile} 
@@ -162,7 +122,7 @@ class App extends Component {
                  gameStarted={this.state.gameStarted} 
         />
         <div style={css.stagingArea}>
-          <PlayGrid id="stagingArea" letters={this.state.startingLetters} dragTile={this.dragTile.bind(this)} dropTile={this.dropTile.bind(this)} />
+          <PlayGrid id="stagingArea" gridData={this.state.gridData} dragTile={this.dragTile.bind(this)} dropTile={this.dropTile.bind(this)} />
         </div>
       </div>
     );

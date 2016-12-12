@@ -1,35 +1,6 @@
-export function create2DArray(rowCount, colCount){
-  var rows = [];
-  
-  for(var i = 0; i < rowCount; i++){
-    rows.push([]); 
-  
-    for(var j = 0; j < colCount; j++){
-      rows[i].push(undefined);
-    }
-  }
-  return rows;
-}
-
-export function fill2DArray(array, values){
-  row_loop: 
-  for(var row = 0; row < array.length; row++){  
-    for(var cell = 0; cell < array[row].length; cell++){
-      if (array[row][cell] === undefined) {
-        array[row][cell] = values.shift();
-        if (values.length === 0) {
-          break row_loop;
-        }
-      }
-    }
-  }
-  return array;
-}
-
-export function findWords(startingLetters) {
-  var letters = startingLetters; 
-  var numOfRows = letters.length;
-  var numOfCols = letters[0].length;
+export function findWords(gridData) {
+  var numOfRows = gridData.length;
+  var numOfCols = gridData[0].length;
   var word = '';
   var rowWords = [];
   var colWords = [];
@@ -38,7 +9,7 @@ export function findWords(startingLetters) {
   
   for (let row = 0; row < numOfRows; row++) {
     for (let col = 0; col < numOfCols; col++) {
-      let cellLetter    = letters[row][col];
+      let cellLetter    = gridData[row][col].letter;
       let cellHasLetter = cellLetter !== undefined;
       let isLastCell    = col === numOfCols - 1;
 
@@ -68,7 +39,7 @@ export function findWords(startingLetters) {
 
   for (let col = 0; col < numOfCols; col++) {
     for (let row = 0; row < numOfRows; row++) {
-      let cellLetter    = letters[row][col];
+      let cellLetter    = gridData[row][col].letter;
       let cellHasLetter = cellLetter !== undefined;
       let isLastCell    = row === numOfRows - 1;
 
@@ -112,7 +83,7 @@ export function checkWords (allWords, dictionary) {
   return notWords;
 }
 
-export function calculate (startingLetters, notWords) {
+export function calculate (gridData, notWords) {
  for (var i = 0; i < notWords.length; i++) {
   for (var j = notWords[i].startingRow; j < notWords[i].endingRow + 1; j++) {
     for (var k = notWords[i].startingCol; k < notWords[i].endingCol +1; k++) {
@@ -125,11 +96,12 @@ export function calculate (startingLetters, notWords) {
 /*
 TO DO
   - DONE: in checkWords, make array of all words (and their coordinates) not in dictionary, and return it
-  - refactor startingLetters to be gridData, containing objects instead of strings. 
-    Includes letter key for letter, highlight key true/false (false by default). This way can add for more rules later.
+  - DONE: refactor startingLetters to be gridData, containing objects instead of strings. 
+    Includes letter key for letter, error key true/false (false by default, true highlights cell). 
+    This way can add for more rules later.
   - in new function called ...calculate? calculate all grid cells that will be highlighted 
     (all points between startingRow/endingRow startingCol/endingCol). 
-    Modify startingLetters (aka gridData ?) 2d array
+    Modify gridData
   - Merge highlight data (from calculate function) into gridData highlight key. (this.state / setState to re-render)  
 */
 

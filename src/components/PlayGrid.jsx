@@ -9,10 +9,12 @@ const css = {
 
 class PlayGrid extends Component {
   static propTypes = {
-    letters: React.PropTypes.array.isRequired,
+    gridData: React.PropTypes.array,
   };
 
   render() {
+    if (this.props.gridData === null) { return null; }
+
     return (
       <table style={css.playGrid}>
         <tbody>
@@ -24,9 +26,9 @@ class PlayGrid extends Component {
 
   renderRows() {
     var rows = [];
-    for (var i = 0; i < this.props.letters.length; i++) {
+    for (var i = 0; i < this.props.gridData.length; i++) {
       rows.push(
-        <PlayGridRow key={i} letters={this.props.letters[i]} dragTile={this.props.dragTile.bind(null, i)} dropTile={this.props.dropTile.bind(null, i)} />
+        <PlayGridRow key={i} rowData={this.props.gridData[i]} dragTile={this.props.dragTile.bind(null, i)} dropTile={this.props.dropTile.bind(null, i)} />
       );  
     }
     return rows;
