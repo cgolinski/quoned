@@ -17,7 +17,7 @@ export function createGridData(rowCount, colCount) {
 }
 
 
-export function fillGridData(gridData, letters){
+export function fillGridData(gridData, letters) {
   row_loop: 
   for(var row = 0; row < gridData.length; row++){  
     for(var cell = 0; cell < gridData[row].length; cell++){
@@ -27,6 +27,15 @@ export function fillGridData(gridData, letters){
           break row_loop;
         }
       }
+    }
+  }
+  return gridData;
+}
+
+export function clearErrors (gridData) {
+  for(var row = 0; row < gridData.length; row++){  
+    for(var cell = 0; cell < gridData[row].length; cell++){
+      gridData[row][cell].setError(false);
     }
   }
   return gridData;

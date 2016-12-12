@@ -73,24 +73,31 @@ export function findWords(gridData) {
 export function checkWords (allWords, dictionary) {
   // if word is in dictionary, move onto next item in array
   // if word is not in dictionary, throw error to user (highlight word)
-  var notWords = [];
+  var nonWords = [];
   for (var i = 0; i < allWords.length; i++) {
     if (!dictionary.has(allWords[i].word)) {
-      notWords.push(allWords[i]);
-    };
-  }
-  console.log('notWords: ', notWords);
-  return notWords;
-}
-
-export function calculate (gridData, notWords) {
- for (var i = 0; i < notWords.length; i++) {
-  for (var j = notWords[i].startingRow; j < notWords[i].endingRow + 1; j++) {
-    for (var k = notWords[i].startingCol; k < notWords[i].endingCol +1; k++) {
-
+      nonWords.push(allWords[i]);
     }
   }
- }
+  console.log('nonWords: ', nonWords);
+  return nonWords;
+}
+
+export function removeSingleLetterWords (nonWords) {
+  return nonWords.filter(function(item) {
+    return item.word.length > 1;
+  });
+}
+
+export function setNonWordErrorCells (gridData, nonWords) {
+  for (var i = 0; i < nonWords.length; i++) {
+    for (var j = nonWords[i].startingRow; j < nonWords[i].endingRow + 1; j++) {
+      for (var k = nonWords[i].startingCol; k < nonWords[i].endingCol + 1; k++) {
+        gridData[j][k].setError(true);
+      }
+    }
+  }
+  return gridData;
 }
 
 /*
@@ -103,6 +110,7 @@ TO DO
     (all points between startingRow/endingRow startingCol/endingCol). 
     Modify gridData
   - Merge highlight data (from calculate function) into gridData highlight key. (this.state / setState to re-render)  
+  - Move everything from array.js into GridData.js
 */
 
 

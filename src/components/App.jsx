@@ -5,10 +5,9 @@ import LetterPile from '../model/LetterPile.js';
 import {createStartingHand} from '../helpers/letters.js';
 import {create2DArray} from '../helpers/array.js';
 import {fill2DArray} from '../helpers/array.js';
-import {findWords} from '../helpers/array.js';
-import {checkWords} from '../helpers/array.js';
+import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords} from '../helpers/array.js';
 import dictionary from '../model/dictionary.js';
-import {createGridData, fillGridData} from '../model/GridData.js';
+import {createGridData, fillGridData, clearErrors} from '../model/GridData.js';
 
 var rowCount = 10;
 var colCount = 10;
@@ -85,12 +84,24 @@ class App extends Component {
     }
   }
 
+
+
+
   peel() {
+    clearErrors(this.state.gridData);
     var allWords = findWords(this.state.gridData);
-    checkWords(allWords, dictionary);
+    var nonWords = checkWords(allWords, dictionary);
+    var hasErrors = nonWords.length !== 0;
+
+    if (hasErrors) {
+      nonWords = removeSingleLetterWords(nonWords);
+      setNonWordErrorCells(this.state.gridData, nonWords);
+    } else {
+      fillGridData(this.state.gridData, letterPile.peel(1));
+    }
 
     this.setState({
-      gridData: fillGridData(this.state.gridData, letterPile.peel(1)),
+      gridData: this.state.gridData,
       nextPeelWins: letterPile.count() < this.state.numOfPlayers,
     });
   }
@@ -114,12 +125,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <MenuBar letters={letterPile} 
-                 nextPeelWins={this.state.nextPeelWins} 
-                 peel={this.peel.bind(this)} 
-                 bananas={this.bananas.bind(this)} 
-                 startGame={this.startGame.bind(this)} 
-                 gameStarted={this.state.gameStarted} 
+        <MenuBar 
+          letters={letterPile} 
+          nextPeelWins={this.state.nextPeelWins} 
+          peel={this.peel.bind(this)} 
+          bananas={this.bananas.bind(this)} 
+          startGame={this.startGame.bind(this)} 
+          gameStarted={this.state.gameStarted} 
         />
         <div style={css.stagingArea}>
           <PlayGrid id="stagingArea" gridData={this.state.gridData} dragTile={this.dragTile.bind(this)} dropTile={this.dropTile.bind(this)} />

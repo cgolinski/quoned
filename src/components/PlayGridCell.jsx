@@ -9,6 +9,9 @@ const css = {
     textAlign: 'center',
     padding: '0px',
   },
+  error: {
+    backgroundColor: 'yellow',
+  },
   letter: {
     fontSize: '24px',
     fontWeight: 'bold',
@@ -33,13 +36,22 @@ class PlayGridCell extends Component {
     console.log('Drag Over Handler!');
   }
 
+  getCellCss() {
+    var styles = Object.assign({}, css.playGridCell);
+    if (this.props.cellData.error) {
+      Object.assign(styles, css.error);
+    }
+    return styles;
+  }
+
   render() {
     return (
-      <td style={css.playGridCell} onDrop={this.dropHandler.bind(this)} onDragOver={this.dragOverHandler.bind(this)}>
+      <td style={this.getCellCss()} onDrop={this.dropHandler.bind(this)} onDragOver={this.dragOverHandler.bind(this)}>
         {this.props.cellData.letter === undefined ? null : 
           <span style={css.letter}>
-            <LetterTile letter={this.props.cellData.letter}
-                        dragTile={this.props.dragTile}
+            <LetterTile 
+              letter={this.props.cellData.letter}
+              dragTile={this.props.dragTile}
             />
           </span> 
         }
