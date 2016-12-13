@@ -28,7 +28,12 @@ class PlayGrid extends Component {
     var rows = [];
     for (var i = 0; i < this.props.gridData.length; i++) {
       rows.push(
-        <PlayGridRow key={i} rowData={this.props.gridData[i]} dragTile={this.props.dragTile.bind(null, i)} dropTile={this.props.dropTile.bind(null, i)} />
+        <PlayGridRow 
+          key={i} 
+          rowData={this.props.gridData[i]} 
+          dragTile={this.props.dragTile.bind(null, i)} 
+          dropTile={this.props.dropTile.bind(null, i)} 
+        />
       );  
     }
     return rows;

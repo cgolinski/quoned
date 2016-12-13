@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import MenuBar from './MenuBar.jsx';
 import PlayGrid from './PlayGrid.jsx';
 import LetterPile from '../model/LetterPile.js';
-import {createStartingHand} from '../helpers/letters.js';
-import {create2DArray} from '../helpers/array.js';
-import {fill2DArray} from '../helpers/array.js';
-import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords} from '../helpers/array.js';
+import {createStartingHand} from '../model/LetterPile.js';
 import dictionary from '../model/dictionary.js';
+import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords} from '../model/GridData.js';
 import {createGridData, fillGridData, clearErrors} from '../model/GridData.js';
 
 var rowCount = 10;
@@ -49,6 +47,7 @@ class App extends Component {
       showLetterPileInfo: false,
       gameStarted: false,
       numOfPlayers: null,
+      showErrors: false,
     }; 
   }
 
@@ -67,25 +66,28 @@ class App extends Component {
     var originCell = this.state.originCell;
     var letterInOriginCell = this.state.gridData[originCell.row][originCell.column].letter;
 
-    /* PROBLEMS: 
+    /* QUESTIONS: 
        1) Updating pointer variables, not original state. How to update original state
           so tile actually moves, while keeping function readable?
-       2) Plus sign briefly flashes as tile starts being dragged.
     */
+
 
     if (destinationCellIsEmpty) {
       letterInDestinationCell = letterInOriginCell;
       this.state.gridData[row][column].letter = letterInDestinationCell;
       this.state.gridData[originCell.row][originCell.column].letter = undefined;
+      
+      if (this.state.showErrors) {
+        clearErrors(this.state.gridData);
+      }
+      
       this.setState({
         originCell: undefined,
         gridData: this.state.gridData,
+        showErrors: false,
       });
     }
   }
-
-
-
 
   peel() {
     clearErrors(this.state.gridData);
@@ -103,6 +105,7 @@ class App extends Component {
     this.setState({
       gridData: this.state.gridData,
       nextPeelWins: letterPile.count() < this.state.numOfPlayers,
+      showErrors: true,
     });
   }
 
@@ -134,7 +137,12 @@ class App extends Component {
           gameStarted={this.state.gameStarted} 
         />
         <div style={css.stagingArea}>
-          <PlayGrid id="stagingArea" gridData={this.state.gridData} dragTile={this.dragTile.bind(this)} dropTile={this.dropTile.bind(this)} />
+          <PlayGrid 
+            id="stagingArea" 
+            gridData={this.state.gridData} 
+            dragTile={this.dragTile.bind(this)} 
+            dropTile={this.dropTile.bind(this)} 
+          />
         </div>
       </div>
     );
