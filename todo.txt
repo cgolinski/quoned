@@ -1,10 +1,17 @@
 *** To Do ***
 
 Next feature: 
-dictionary
-npm library, <500K file because has to dwnld on user's comp
+Check all words are connected
+- look up algorithm for making sure all words are connected to other words
+	- maybe use a flood fill algorithm (like paintbrush to fill contents), fills all 	
+		contiguous cells that contain a tile. 
+	- Then check to make sure equals total number of tiles on board.
 
-- Use larger dictionary that contains more common words
+
+
+
+
+
 - Connect to server
 - Create one board per player
 - Render small version of other players' boards in each player's view
@@ -18,10 +25,6 @@ npm library, <500K file because has to dwnld on user's comp
 - When game over, check all words are connected, all rules are in dictionary
 
 
-look up algorithm for making sure all words are connected to other words
-	- maybe use a flood fill algorithm (like paintbrush to fill contents), fills all 	
-		contiguous cells that contain a tile. 
-	- Then check to make sure equals total number of tiles on board.
 
 
 
