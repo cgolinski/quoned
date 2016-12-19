@@ -24,6 +24,11 @@ const css = {
     marginLeft: '100px',
     marginTop: '10px',
   },
+  errors: {
+    fontWeight: 'bold',
+    display: 'block',
+    float: 'left',
+  },
 }
 
 class LetterPileInfo extends Component {
@@ -32,11 +37,13 @@ class LetterPileInfo extends Component {
     peel: React.PropTypes.func.isRequired,
     bananas: React.PropTypes.func.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
+    globalErrors: React.PropTypes.array.isRequired,
   };
 
   render() {
     var peelStyles = this.props.nextPeelWins ? css.hidden : css.peel;
     var bananasStyles = this.props.nextPeelWins ? css.bananas : css.hidden;
+    var errorStyles = this.props.globalErrors.length > 0 ? css.errors : css.hidden;
 
     return (
       <div>
@@ -45,6 +52,9 @@ class LetterPileInfo extends Component {
         <div style={css.remainingTiles}>
           Remaining tiles:
           {this.props.letters.count()}
+        </div>
+        <div style={errorStyles}>
+          {this.props.globalErrors}
         </div>
       </div>
     );

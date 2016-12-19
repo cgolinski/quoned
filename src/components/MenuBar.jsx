@@ -31,6 +31,7 @@ class MenuBar extends Component {
     peel: React.PropTypes.func.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
     gameStarted: React.PropTypes.bool.isRequired,
+    globalErrors: React.PropTypes.array.isRequired,
   };
 
   render() {
@@ -38,8 +39,18 @@ class MenuBar extends Component {
       <div style={css.menuBar}>
         {
           this.props.gameStarted
-          ? <LetterPileInfo style={css.hidden} letters={this.props.letters} nextPeelWins={this.props.nextPeelWins} peel={this.props.peel} bananas={this.props.bananas} /> 
-          : <StartingOptions style={css.startingOptions} startGame={this.props.startGame}/> 
+          ? <LetterPileInfo 
+              style={css.hidden} 
+              letters={this.props.letters} 
+              nextPeelWins={this.props.nextPeelWins} 
+              peel={this.props.peel} 
+              bananas={this.props.bananas} 
+              globalErrors={this.props.globalErrors}
+            /> 
+          : <StartingOptions 
+              style={css.startingOptions} 
+              startGame={this.props.startGame}
+            /> 
         }
       </div>
     );

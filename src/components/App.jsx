@@ -4,7 +4,7 @@ import PlayGrid from './PlayGrid.jsx';
 import LetterPile from '../model/LetterPile.js';
 import {createStartingHand} from '../model/LetterPile.js';
 import dictionary from '../model/dictionary.js';
-import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords} from '../model/GridData.js';
+import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords, checkLettersConnected} from '../model/GridData.js';
 import {createGridData, fillGridData, clearErrors} from '../model/GridData.js';
 
 var rowCount = 10;
@@ -48,6 +48,7 @@ class App extends Component {
       gameStarted: false,
       numOfPlayers: null,
       showErrors: false,
+      globalErrors: [],
     }; 
   }
 
@@ -80,7 +81,7 @@ class App extends Component {
       if (this.state.showErrors) {
         clearErrors(this.state.gridData);
       }
-      
+
       this.setState({
         originCell: undefined,
         gridData: this.state.gridData,
@@ -90,13 +91,23 @@ class App extends Component {
   }
 
   peel() {
+    var lettersConnected = checkLettersConnected(this.state.gridData);
+    var globalErrors = [];
+
+    if (!lettersConnected) {
+      globalErrors.push('All words must be connected.');
+    } 
+
     clearErrors(this.state.gridData);
+
     var allWords = findWords(this.state.gridData);
     var nonWords = checkWords(allWords, dictionary);
+    
+    nonWords = removeSingleLetterWords(nonWords);
+    
     var hasErrors = nonWords.length !== 0;
 
     if (hasErrors) {
-      nonWords = removeSingleLetterWords(nonWords);
       setNonWordErrorCells(this.state.gridData, nonWords);
     } else {
       fillGridData(this.state.gridData, letterPile.peel(1));
@@ -105,7 +116,8 @@ class App extends Component {
     this.setState({
       gridData: this.state.gridData,
       nextPeelWins: letterPile.count() < this.state.numOfPlayers,
-      showErrors: true,
+      showErrors: true, //rename to showCellErrors
+      globalErrors: globalErrors, //was name hasErrors
     });
   }
 
@@ -135,6 +147,7 @@ class App extends Component {
           bananas={this.bananas.bind(this)} 
           startGame={this.startGame.bind(this)} 
           gameStarted={this.state.gameStarted} 
+          globalErrors={this.state.globalErrors}
         />
         <div style={css.stagingArea}>
           <PlayGrid 

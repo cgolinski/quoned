@@ -1,4 +1,5 @@
 import CellData from './CellData.js';
+import {flatten} from 'lodash';
 
 export function createGridData(rowCount, colCount) {
 	var gridData = [];
@@ -140,6 +141,53 @@ export function setNonWordErrorCells (gridData, nonWords) {
   return gridData;
 }
 
+export function findFirstLetter (gridData) { 
+  var numOfRows = gridData.length;
+  var numOfCols = gridData[0].length;
+  
+  for (let row = 0; row < numOfRows; row++) {
+    for (let col = 0; col < numOfCols; col++) {
+      let cellLetter = gridData[row][col].letter
+      let cellHasLetter = cellLetter !== undefined;
+
+      if (cellHasLetter) {
+        console.log('firstletter is in row: ', row, 'col: ', col)
+        return {row: row, col: col, letter: cellLetter};
+      }
+    }
+  }
+}
+
+export function checkLettersConnected (gridData) { 
+  console.log('checking if letters are connected')
+  var visited = new Set();
+
+  var startingCell = findFirstLetter(gridData);
+  checkCell(startingCell.row, startingCell.col); 
+
+  function checkCell (row, col) {
+    var cellData = gridData[row] && gridData[row][col];
+
+    if (cellData == null || !cellData.letter || visited.has(cellData)) {
+      return;
+    }
+    
+    visited.add(cellData);
+
+    checkCell(row - 1, col); //up neighbor
+    checkCell(row, col + 1); //right neighbor
+    checkCell(row + 1, col); //down neighbor
+    checkCell(row, col - 1); //left neighbor
+  } 
+
+  var totalLettersInGrid = flatten(gridData).filter(cellData => cellData.letter != null).length;
+  
+  if (visited.size !== totalLettersInGrid) {
+    console.log('Error: All words must connect');
+    return false;
+  }
+  return true;
+}
 
       
 /*
