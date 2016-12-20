@@ -1,17 +1,12 @@
 *** To Do ***
 
 Next feature: 
-Check all words are connected
-- look up algorithm for making sure all words are connected to other words
-	- maybe use a flood fill algorithm (like paintbrush to fill contents), fills all 	
-		contiguous cells that contain a tile. 
-	- Then check to make sure equals total number of tiles on board.
 
 
 
 
 
-
+- Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
 - Connect to server
 - Create one board per player
 - Render small version of other players' boards in each player's view
@@ -24,6 +19,7 @@ Check all words are connected
 - Create game over status when all tiles placed
 - When game over, check all words are connected, all rules are in dictionary
 
+- Redesign
 
 
 

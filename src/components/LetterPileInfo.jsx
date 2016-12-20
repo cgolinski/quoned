@@ -26,8 +26,9 @@ const css = {
   },
   errors: {
     fontWeight: 'bold',
-    display: 'block',
     float: 'left',
+    marginLeft: '100px',
+    marginTop: '10px',
   },
 }
 
@@ -54,6 +55,7 @@ class LetterPileInfo extends Component {
           {this.props.letters.count()}
         </div>
         <div style={errorStyles}>
+          Errors:
           {this.props.globalErrors}
         </div>
       </div>

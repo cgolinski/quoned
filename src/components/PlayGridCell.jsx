@@ -46,7 +46,11 @@ class PlayGridCell extends Component {
 
   render() {
     return (
-      <td style={this.getCellCss()} onDrop={this.dropHandler.bind(this)} onDragOver={this.dragOverHandler.bind(this)}>
+      <td 
+        style={this.getCellCss()} 
+        onDrop={this.dropHandler.bind(this)} 
+        onDragOver={this.dragOverHandler.bind(this)}
+      >
         {this.props.cellData.letter === undefined ? null : 
           <span style={css.letter}>
             <LetterTile 

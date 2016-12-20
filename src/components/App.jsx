@@ -6,6 +6,7 @@ import {createStartingHand} from '../model/LetterPile.js';
 import dictionary from '../model/dictionary.js';
 import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords, checkLettersConnected} from '../model/GridData.js';
 import {createGridData, fillGridData, clearErrors} from '../model/GridData.js';
+import {colors} from '../helpers/colors.js';
 
 var rowCount = 10;
 var colCount = 10;
@@ -14,9 +15,9 @@ const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiii
 var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
 const css = {
-  stagingArea: {
+  playArea: {
     display: 'inline-block',
-    marginLeft: '10%',
+    margin: '5%',
   },
 };
 
@@ -47,7 +48,7 @@ class App extends Component {
       showLetterPileInfo: false,
       gameStarted: false,
       numOfPlayers: null,
-      showErrors: false,
+      showCellErrors: false,
       globalErrors: [],
     }; 
   }
@@ -78,14 +79,14 @@ class App extends Component {
       this.state.gridData[row][column].letter = letterInDestinationCell;
       this.state.gridData[originCell.row][originCell.column].letter = undefined;
       
-      if (this.state.showErrors) {
+      if (this.state.showCellErrors) {
         clearErrors(this.state.gridData);
       }
 
       this.setState({
         originCell: undefined,
         gridData: this.state.gridData,
-        showErrors: false,
+        showCellErrors: false,
       });
     }
   }
@@ -105,7 +106,7 @@ class App extends Component {
     
     nonWords = removeSingleLetterWords(nonWords);
     
-    var hasErrors = nonWords.length !== 0;
+    var hasErrors = nonWords.length !== 0 || !lettersConnected;
 
     if (hasErrors) {
       setNonWordErrorCells(this.state.gridData, nonWords);
@@ -116,8 +117,8 @@ class App extends Component {
     this.setState({
       gridData: this.state.gridData,
       nextPeelWins: letterPile.count() < this.state.numOfPlayers,
-      showErrors: true, //rename to showCellErrors
-      globalErrors: globalErrors, //was name hasErrors
+      showCellErrors: true,
+      globalErrors: globalErrors,
     });
   }
 
@@ -149,9 +150,9 @@ class App extends Component {
           gameStarted={this.state.gameStarted} 
           globalErrors={this.state.globalErrors}
         />
-        <div style={css.stagingArea}>
+        <div style={css.playArea}>
           <PlayGrid 
-            id="stagingArea" 
+            id="playArea" 
             gridData={this.state.gridData} 
             dragTile={this.dragTile.bind(this)} 
             dropTile={this.dropTile.bind(this)} 
