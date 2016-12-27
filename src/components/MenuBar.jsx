@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import LetterPileInfo from './LetterPileInfo.jsx';
 import StartingOptions from './StartingOptions.jsx';
+import {colors} from '../helpers/colors.js';
 
 
 var css = {
   menuBar: {
-    color: 'blue',
+    display: 'flex',
+    flex: '2',
+    flexFlow: 'column', 
+    color: colors.white,
     fontSize: '18px',
     border: '1px solid black',
-    padding: '10px',
-    paddingBottom: '60px',
-    backgroundColor: 'orange',
-    display: 'block',
-    float: 'left',
+    backgroundColor: colors.green,
     minWidth: '100px', 
-    width: '20%',
-    height: '100%',
     marginLeft: '0px',
-    marginBottom: '20px',
   },
   hidden: {
     display: 'none',

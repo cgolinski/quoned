@@ -6,4 +6,9 @@ export const colors = {
 	brown: '#523200',
 	tan: '#D3B88C',
 	white: '#F4F2F3',
+
+	lightBrown: '#614417',
+	darkBrown: '#2D1C00',
 };
+
+

@@ -2,7 +2,10 @@
 
 Next feature: 
 
-
+Make two new components under App.jsx
+	- Game (holds everything currently in App.jsx)
+	- Main Menu (startingOptions)
+	- Then if statement to toggle between rendering Game and Main Menu
 
 
 

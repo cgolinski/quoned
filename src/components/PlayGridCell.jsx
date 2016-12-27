@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import LetterTile from './LetterTile.jsx';
+import {colors} from '../helpers/colors.js';
 
 const css = {
   playGridCell: {
-    border: '1px solid grey',
+    border: `2px dashed ${colors.lightBrown}`,
     width: '50px',
     height: '50px',
     textAlign: 'center',

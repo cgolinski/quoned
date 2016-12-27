@@ -1,34 +1,70 @@
 import React, { Component } from 'react';
 import LetterTile from './LetterTile.jsx';
+import {colors} from '../helpers/colors.js';
+
 
 const css = {
+  letterPileInfo: {
+    display: 'flex',
+    flex: '1',
+    flexFlow: 'column',
+    justifyContent: 'space-between',
+  },
+  infoTop: {
+    height: '400px',
+  },
+  infoBottom: { 
+  },
+  gameTitle: {
+    fontSize: '30px',
+    marginTop: '10px',
+    marginBottom: '20px',
+    textAlign: 'center',
+  },
   peel: {
-    width: '70px',
+    display: 'block',
+    width: '80%',
     height: '40px',
-    display: 'block', 
-    position: 'absolute',
-    float: 'left',
+    marginBottom: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    backgroundColor: colors.white,
+    borderRadius: '7px',
   },
   bananas: {
-    width: '70px',
+    display: 'block',
+    width: '80%',
     height: '40px',
-    display: 'block', 
-    position: 'absolute',
-    float: 'left',
+    marginBottom: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    backgroundColor: colors.white,
+    borderRadius: '7px',
   },
   hidden: {
     display: 'none',
   },
-  remainingTiles: {
-    float: 'left',
-    marginLeft: '100px',
-    marginTop: '10px',
-  },
-  errors: {
+  errors: { 
     fontWeight: 'bold',
-    float: 'left',
-    marginLeft: '100px',
-    marginTop: '10px',
+    marginBottom: '20px',
+    marginLeft: '10px',
+  },
+  letterPileImage: {
+    border: '1px solid black',
+    height: '160px',
+    width: '100px',
+    display: 'block',
+    marginBottom: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    backgroundColor: colors.tan,
+  },
+  remainingTiles: {
+    display: 'flex',
+    backgroundColor: colors.grey,
+    height: '40px',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }
 
@@ -47,16 +83,32 @@ class LetterPileInfo extends Component {
     var errorStyles = this.props.globalErrors.length > 0 ? css.errors : css.hidden;
 
     return (
-      <div>
-        <button style={peelStyles} type="button" value="Peel" onClick={this.props.peel}>Peel</button>
-        <button style={bananasStyles} type="button" value="Bananas" onClick={this.props.bananas}>Bananas</button>
-        <div style={css.remainingTiles}>
-          Remaining tiles:
-          {this.props.letters.count()}
+      <div style={css.letterPileInfo}>
+        <div style={css.infoTop}>
+          <div style={css.gameTitle}>
+            Letter Game
+          </div>
+          <div>
+            <button style={peelStyles} type="button" value="Peel" onClick={this.props.peel}>
+              Peel!
+            </button>
+            <button style={bananasStyles} type="button" value="Bananas" onClick={this.props.bananas}>
+              Bananas!
+            </button>
+          </div>
+          <div style={errorStyles}>
+            Errors:&nbsp;
+            {this.props.globalErrors}
+          </div>
         </div>
-        <div style={errorStyles}>
-          Errors:
-          {this.props.globalErrors}
+        <div style={css.infoBottom}>
+          <div style={css.letterPileImage}>
+            [Image goes here]
+          </div>
+          <div style={css.remainingTiles}>
+            Remaining tiles:&nbsp;
+            {this.props.letters.count()}
+          </div>
         </div>
       </div>
     );

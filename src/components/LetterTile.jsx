@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
+import {colors} from '../helpers/colors.js';
 
 var LetterTileStyle = {
-  fontSize: '18px',
+  fontSize: '19px',
   fontWeight: 'bold',
-  backgroundColor: '#f9ebc0',
-  color: '#2b281d',
-  width: '70%',
-  height: '70%',
+  backgroundColor: colors.tan,
+  color: colors.darkBrown,
+  width: '75%',
+  height: '75%',
   paddingTop: '6px',
   display: 'inline-block',
   margin: '0px',
   borderRadius: '4px',
-  textShadow: '0px 1px 0px white',
-  boxShadow: 'inset 1px 1px 3px #ffffd0, inset -1px -1px 3px #d3ca94',
+  // -- old colors below --
+  //backgroundColor: '#f9ebc0',
+  //color: '#2b281d',
+  //textShadow: '0px 1px 0px white',
+  //boxShadow: 'inset 1px 1px 3px #ffffd0, inset -1px -1px 3px #d3ca94',
 };
 
 class LetterTile extends Component {

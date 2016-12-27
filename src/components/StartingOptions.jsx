@@ -5,6 +5,15 @@ const css = {
   hidden: {
     display: 'none',
   },
+  gameTitle: {
+    fontSize: '30px',
+    marginTop: '10px',
+    marginBottom: '20px',
+    textAlign: 'center',
+  },
+  startGame: {
+    backgroundColor: 'white',
+  },
 }
 
 class StartingOptions extends Component {
@@ -27,6 +36,9 @@ class StartingOptions extends Component {
   render() {
     return (
       <div>
+        <div style={css.gameTitle}>
+          Letter Game
+        </div>
         <form onSubmit={this.handleSubmit}>
           <label>No. of players 
             <select name="numOfPlayers" >
