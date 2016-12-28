@@ -3,10 +3,14 @@
 Next feature: 
 
 Make two new components under App.jsx
+	- Do one step at a time, making sure the program keeps working.
+	- Build Main Menu separately, then merge in and delete old stuff after.
 	- Game (holds everything currently in App.jsx)
 	- Main Menu (startingOptions)
 	- Then if statement to toggle between rendering Game and Main Menu
-
+	- Everything in App stays in App. App loads Main Menu or Game, and passes props down to Main Menu or Game.
+	- StartGame and GameStarted can stay in App and trigger if statement Main Menu or Game to load (instead of current MenuBar if statement that loads startingOptions or Info).
+	
 
 
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile

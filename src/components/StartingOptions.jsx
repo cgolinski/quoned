@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
 import getFormData from 'get-form-data';
+import {colors} from '../helpers/colors.js';
+
 
 const css = {
   hidden: {
     display: 'none',
   },
   gameTitle: {
-    fontSize: '30px',
-    marginTop: '10px',
-    marginBottom: '20px',
+    fontSize: '60px',
+    textTransform: 'uppercase',
+    paddingTop: '80px',
+    paddingBottom: '80px',
+    textAlign: 'center',
+  },
+  numOfPlayersForm: {
     textAlign: 'center',
   },
   startGame: {
-    backgroundColor: 'white',
+    backgroundColor: colors.green,
+    color: colors.white,
+    fontSize: '24px',
+    width: '80px',
+    height: '40px',
+    margin: '10px',
+    borderRadius: '5px',
   },
+
 }
 
 class StartingOptions extends Component {
@@ -37,10 +50,10 @@ class StartingOptions extends Component {
     return (
       <div>
         <div style={css.gameTitle}>
-          Letter Game
+          Letter<br />Game!
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <label>No. of players 
+        <form style={css.numOfPlayersForm} onSubmit={this.handleSubmit}>
+          <label> 
             <select name="numOfPlayers" >
               <option value="1">1</option> 
               <option value="2">2</option>
@@ -51,9 +64,10 @@ class StartingOptions extends Component {
               <option value="7">7</option>
               <option value="8">8</option>
             </select>
+            <br />Players<br />
           </label>
 
-          <input style={css.startGame} type="submit" value="Start Game" />
+          <input style={css.startGame} type="submit" value="Go!" />
         </form>
       </div>
     );

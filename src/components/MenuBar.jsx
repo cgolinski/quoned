@@ -36,9 +36,11 @@ class MenuBar extends Component {
   render() {
     return (
       <div style={css.menuBar}>
+        {/*
         {
           this.props.gameStarted
-          ? <LetterPileInfo 
+          ? */}
+          <LetterPileInfo 
               style={css.hidden} 
               letters={this.props.letters} 
               nextPeelWins={this.props.nextPeelWins} 
@@ -46,11 +48,13 @@ class MenuBar extends Component {
               bananas={this.props.bananas} 
               globalErrors={this.props.globalErrors}
             /> 
+          {/*
           : <StartingOptions 
               style={css.startingOptions} 
               startGame={this.props.startGame}
             /> 
         }
+      */}
       </div>
     );
   }

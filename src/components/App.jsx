@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import MainMenu from './MainMenu.jsx';
 import MenuBar from './MenuBar.jsx';
+import Game from './Game.jsx';
 import PlayGrid from './PlayGrid.jsx';
 import LetterPile from '../model/LetterPile.js';
 import {createStartingHand} from '../model/LetterPile.js';
@@ -15,17 +17,8 @@ const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiii
 var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
 const css = {
-  wholeGame: {
-    display: 'flex',
-    flex: '1',
+  App: {
     height: '100%',
-  },
-  playArea: {
-    display: 'flex',
-    flex: '6',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.brown,
   },
 };
 
@@ -148,25 +141,24 @@ class App extends Component {
 
   render() {
     return (
-      <div style={css.wholeGame}>
-        <MenuBar 
-          letters={letterPile}
-          nextPeelWins={this.state.nextPeelWins} 
-          peel={this.peel.bind(this)} 
-          bananas={this.bananas.bind(this)} 
-          startGame={this.startGame.bind(this)} 
-          gameStarted={this.state.gameStarted} 
-          globalErrors={this.state.globalErrors}
-        />       
-        <div style={css.playArea}>
-          <PlayGrid 
-            id="playArea" 
-            gridData={this.state.gridData} 
-            dragTile={this.dragTile.bind(this)} 
-            dropTile={this.dropTile.bind(this)} 
-          />
-        </div>
-      </div>
+      <div style={css.App}>
+        {
+          this.state.gameStarted
+          ? <Game 
+              letters={letterPile}
+              nextPeelWins={this.state.nextPeelWins} 
+              peel={this.peel.bind(this)} 
+              bananas={this.bananas.bind(this)} 
+              globalErrors={this.state.globalErrors}
+              gridData={this.state.gridData} 
+              dragTile={this.dragTile.bind(this)} 
+              dropTile={this.dropTile.bind(this)}
+            />
+          : <MainMenu
+              startGame={this.startGame.bind(this)} 
+            />
+        }
+      </div>  
     );
   }
 }
