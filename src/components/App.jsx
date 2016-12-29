@@ -127,6 +127,12 @@ class App extends Component {
     this.peel();
   }
 
+  setStartingOption(name, value) {
+    this.setState({
+      [name]: value,
+    });
+  }
+
   startGame(data) {
     console.log('start game button was clicked');
 
@@ -137,7 +143,7 @@ class App extends Component {
       gameStarted: true,
       numOfPlayers: data.numOfPlayers,
     });
-  };  
+  }  
 
   render() {
     return (
@@ -156,6 +162,8 @@ class App extends Component {
             />
           : <MainMenu
               startGame={this.startGame.bind(this)} 
+              numOfPlayers={this.state.numOfPlayers}
+              setStartingOption={this.setStartingOption.bind(this)}
             />
         }
       </div>  

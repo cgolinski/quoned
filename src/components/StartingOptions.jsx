@@ -17,6 +17,35 @@ const css = {
   numOfPlayersForm: {
     textAlign: 'center',
   },
+  numOfPlayersFormInput: {
+    display: 'none',
+  },
+  numOfPlayersFormLabel: {
+    display: 'inline-block',
+    backgroundColor: colors.white,
+    border: '1px solid ' + colors.tan,
+    margin: '5px',
+    height: '30px',
+    width: '30px', 
+    borderRadius: '15px',
+    fontFamily: 'Arial',
+    fontSize: '16px',
+    textAlign: 'center',
+    lineHeight: '30px',
+  },
+  numOfPlayersFormLabelSelected: {
+    display: 'inline-block',
+    backgroundColor: colors.brown,
+    border: '1px solid ' + colors.tan,
+    margin: '5px',
+    height: '30px',
+    width: '30px', 
+    borderRadius: '15px',
+    fontFamily: 'Arial',
+    fontSize: '16px',
+    textAlign: 'center',
+    lineHeight: '30px',
+  },
   startGame: {
     backgroundColor: colors.green,
     color: colors.white,
@@ -26,8 +55,8 @@ const css = {
     margin: '10px',
     borderRadius: '5px',
   },
-
 }
+
 
 class StartingOptions extends Component {
   constructor(props) {
@@ -46,6 +75,26 @@ class StartingOptions extends Component {
     this.props.startGame(data);
   }  
 
+  handleOnClick(event) {
+    this.props.setStartingOption(event.target.name, parseInt(event.target.value));
+  }
+
+  renderNumOfPlayersRadioButtons () {
+    var maxPlayers = 8;
+    var radioButtons = [];
+    for (var i = 1; i < maxPlayers + 1; i++) {
+      let labelStyle = i === this.props.numOfPlayers ? css.numOfPlayersFormLabelSelected : css.numOfPlayersFormLabel;
+      console.log(i, this.props.numOfPlayers);
+      radioButtons.push (
+        <span key={i-1}>
+          <input style={css.numOfPlayersFormInput} type="radio" name="numOfPlayers" id={"p"+i} value={i} onClick={this.handleOnClick.bind(this)}/>
+          <label style={labelStyle} htmlFor={"p"+i}>{i}</label>
+        </span>
+      );
+    }
+    return radioButtons;    
+  }
+
   render() {
     return (
       <div>
@@ -53,20 +102,8 @@ class StartingOptions extends Component {
           Letter<br />Game!
         </div>
         <form style={css.numOfPlayersForm} onSubmit={this.handleSubmit}>
-          <label> 
-            <select name="numOfPlayers" >
-              <option value="1">1</option> 
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-            </select>
-            <br />Players<br />
-          </label>
-
+          {this.renderNumOfPlayersRadioButtons()}        
+          <label><br />Players<br /></label>        
           <input style={css.startGame} type="submit" value="Go!" />
         </form>
       </div>

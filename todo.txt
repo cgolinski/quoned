@@ -1,16 +1,12 @@
 *** To Do ***
 
 Next feature: 
+1. - Redesign
 
-Make two new components under App.jsx
-	- Do one step at a time, making sure the program keeps working.
-	- Build Main Menu separately, then merge in and delete old stuff after.
-	- Game (holds everything currently in App.jsx)
-	- Main Menu (startingOptions)
-	- Then if statement to toggle between rendering Game and Main Menu
-	- Everything in App stays in App. App loads Main Menu or Game, and passes props down to Main Menu or Game.
-	- StartGame and GameStarted can stay in App and trigger if statement Main Menu or Game to load (instead of current MenuBar if statement that loads startingOptions or Info).
-	
+2. - Create game over status when all tiles placed
+   - When game over, check all words are connected, all words are in dictionary
+
+3. - Put online	
 
 
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
@@ -23,11 +19,7 @@ Make two new components under App.jsx
 	- single player (vs computer, with timer, auto-timed peels)
 	- themes (all words from certain category)
 
-- Create game over status when all tiles placed
-- When game over, check all words are connected, all rules are in dictionary
-
-- Redesign
-
+- Make more secure by doing word validation on server side (currently on client side)
 
 
 

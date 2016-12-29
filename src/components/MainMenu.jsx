@@ -24,6 +24,8 @@ class MainMenu extends Component {
         <StartingOptions 
           style={css.startingOptions} 
           startGame={this.props.startGame}
+          numOfPlayers={this.props.numOfPlayers}
+          setStartingOption={this.props.setStartingOption}
         /> 
       </div>
     );
