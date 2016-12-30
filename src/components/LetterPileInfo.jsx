@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LetterTile from './LetterTile.jsx';
 import {colors} from '../helpers/colors.js';
 
 

@@ -4,12 +4,14 @@ import {colors} from '../helpers/colors.js';
 
 const css = {
   MainMenu: {
+    display: 'flex',
     height: '100%',
     fontSize: '18px',
     backgroundColor: colors.brown,
     color: colors.tan,
     minWidth: '100px', 
-    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
 

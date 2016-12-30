@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import MainMenu from './MainMenu.jsx';
-import MenuBar from './MenuBar.jsx';
 import Game from './Game.jsx';
-import PlayGrid from './PlayGrid.jsx';
 import LetterPile from '../model/LetterPile.js';
 import {createStartingHand} from '../model/LetterPile.js';
 import dictionary from '../model/dictionary.js';
 import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords, checkLettersConnected} from '../model/GridData.js';
 import {createGridData, fillGridData, clearErrors} from '../model/GridData.js';
-import {colors} from '../helpers/colors.js';
 
 var rowCount = 10;
 var colCount = 10;
