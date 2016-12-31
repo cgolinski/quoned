@@ -20,7 +20,8 @@ Next feature:
 	- themes (all words from certain category)
 
 - Make more secure by doing word validation on server side (currently on client side)
-
+- Remove blue outline from around buttons (e.g. Peel) when clicked. Set other hover and click styles.
+ 
 
 
 *** Issues ***

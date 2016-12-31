@@ -12,11 +12,15 @@ const css = {
     textTransform: 'uppercase',
     paddingBottom: '30px',
     textAlign: 'center',
-    fontFamily: 'courier',
-    transform: 'rotate(-0.02turn)'
+    fontFamily: 'Futura',
+  },
+  startingOptionsForm: {
+    textAlign: 'center',
+    fontFamily: 'Futura',
   },
   numOfPlayersForm: {
-    textAlign: 'center',
+    borderTop: '3px double ' + colors.tan,
+    borderBottom: '3px double ' + colors.tan,
   },
   numOfPlayersFormInput: {
     display: 'none',
@@ -24,25 +28,26 @@ const css = {
   numOfPlayersFormLabel: {
     display: 'inline-block',
     backgroundColor: colors.brown,
-    border: '1px solid ' + colors.tan,
-    margin: '5px 5px 15px 5px',
+    border: '2px solid ' + colors.tan,
+    margin: '0px 5px 25px 5px',
     height: '30px',
     width: '30px', 
-    borderRadius: '15px',
-    fontFamily: 'Arial',
+    borderRadius: '17px',
+    fontFamily: 'Futura',
     fontSize: '16px',
     textAlign: 'center',
     lineHeight: '30px',
   },
   numOfPlayersFormLabelSelected: {
     display: 'inline-block',
-    backgroundColor: colors.white,
+    backgroundColor: colors.tan,
     color: colors.brown,
-    margin: '5px 5px 15px 5px',
+    border: '1px solid ' + colors.tan,
+    margin: '0px 5px 25px 5px',
     height: '30px',
     width: '30px', 
-    borderRadius: '15px',
-    fontFamily: 'Arial',
+    borderRadius: '17px',
+    fontFamily: 'Futura',
     fontSize: '16px',
     fontWeight: 'bold',
     textAlign: 'center',
@@ -51,11 +56,13 @@ const css = {
   startGame: {
     backgroundColor: colors.green,
     color: colors.white,
-    fontSize: '24px',
-    padding: '4px 16px 4px 16px',
+    fontSize: '20px',
+    padding: '4px 20px 4px 20px',
     margin: '45px',
     borderRadius: '20px',
     border: 'none',
+    textTransform: 'uppercase',
+    fontFamily: 'Futura',
   },
 }
 
@@ -100,12 +107,14 @@ class StartingOptions extends Component {
     return (
       <div>
         <div style={css.gameTitle}>
-          Letter<br />Game!
+          Letter Game!
         </div>
-        <form style={css.numOfPlayersForm} onSubmit={this.handleSubmit}>
-          {this.renderNumOfPlayersRadioButtons()}        
-          <label><br />Players<br /></label>        
-          <input style={css.startGame} type="submit" value="Play!" />
+        <form style={css.startingOptionsForm} onSubmit={this.handleSubmit}>
+          <div style={css.numOfPlayersForm}>
+            <p>Players:</p>
+            {this.renderNumOfPlayersRadioButtons()}  
+          </div>              
+          <input style={css.startGame} type="submit" value="Play" />
         </form>
       </div>
     );
