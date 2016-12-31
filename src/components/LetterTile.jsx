@@ -3,7 +3,8 @@ import {colors} from '../helpers/colors.js';
 
 var LetterTileStyle = {
   fontSize: '19px',
-  fontWeight: 'bold',
+  fontFamily: 'Futura',
+  textTransform: 'uppercase',
   backgroundColor: colors.tan,
   color: colors.darkBrown,
   width: '75%',

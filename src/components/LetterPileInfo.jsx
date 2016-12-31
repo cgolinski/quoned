@@ -19,6 +19,8 @@ const css = {
     marginTop: '10px',
     marginBottom: '20px',
     textAlign: 'center',
+    fontFamily: 'Futura',
+    textTransform: 'uppercase',
   },
   peel: {
     display: 'block',
@@ -27,8 +29,14 @@ const css = {
     marginBottom: '20px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: colors.white,
-    borderRadius: '7px',
+    backgroundColor: colors.green,
+    borderRadius: '20px',
+    border: 'none',
+    fontFamily: 'Futura',
+    textTransform: 'uppercase',
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: '16px',
   },
   bananas: {
     display: 'block',
@@ -37,8 +45,14 @@ const css = {
     marginBottom: '20px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: colors.white,
-    borderRadius: '7px',
+    backgroundColor: colors.green,
+    borderRadius: '20px',
+    border: 'none',
+    fontFamily: 'Futura',
+    textTransform: 'uppercase',
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: '16px',
   },
   hidden: {
     display: 'none',
@@ -46,24 +60,22 @@ const css = {
   errors: { 
     fontWeight: 'bold',
     marginBottom: '20px',
-    marginLeft: '10px',
+    marginLeft: '500px',
   },
   letterPileImage: {
-    border: '1px solid black',
-    height: '160px',
-    width: '100px',
-    display: 'block',
-    marginBottom: '20px',
+    marginBottom: '0px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: colors.tan,
-  },
-  remainingTiles: {
     display: 'flex',
-    backgroundColor: colors.grey,
-    height: '40px',
-    justifyContent: 'center',
+    flexDirection: 'column-reverse',
     alignItems: 'center',
+  },
+  letterTileInPile: {
+    borderTop: '1px solid ' + colors.darkTan,
+    height: '8px',
+    width: '50px',
+    position: 'relative',
+    backgroundColor: colors.tan,
   },
 }
 
@@ -73,40 +85,49 @@ class LetterPileInfo extends Component {
     peel: React.PropTypes.func.isRequired,
     bananas: React.PropTypes.func.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
-    globalErrors: React.PropTypes.array.isRequired,
   };
+
+  renderLetterPileImage() {
+    var letterPileCount = this.props.letters.count();
+    var letterPileImage = [];
+    var left = [0, 4, 2, 6, 4, 3, 2, 6, 2, 0, 2, 5, 3, 7, 4, 2, 7, 3, 4, 5, 0, 6, 4, 3, -1, 1, 4, -1, 5, 2];
+
+    for (var i = 0; i < letterPileCount; i++) {
+      var newStyle = Object.assign({}, css.letterTileInPile, { left: left[i] });
+
+      letterPileImage.push (
+        <div key={i}>
+          <div style={newStyle}>
+          </div>
+        </div>
+      )
+    }
+    return letterPileImage;
+  }
 
   render() {
     var peelStyles = this.props.nextPeelWins ? css.hidden : css.peel;
     var bananasStyles = this.props.nextPeelWins ? css.bananas : css.hidden;
-    var errorStyles = this.props.globalErrors.length > 0 ? css.errors : css.hidden;
+    //var errorStyles = this.props.globalErrors.length > 0 ? css.errors : css.hidden;
 
     return (
       <div style={css.letterPileInfo}>
         <div style={css.infoTop}>
           <div style={css.gameTitle}>
-            Letter Game
+            Letter Game!
           </div>
           <div>
             <button style={peelStyles} type="button" value="Peel" onClick={this.props.peel}>
-              Peel!
+              Peel
             </button>
             <button style={bananasStyles} type="button" value="Bananas" onClick={this.props.bananas}>
-              Bananas!
+              Bananas
             </button>
-          </div>
-          <div style={errorStyles}>
-            Errors:&nbsp;
-            {this.props.globalErrors}
           </div>
         </div>
         <div style={css.infoBottom}>
           <div style={css.letterPileImage}>
-            [Image goes here]
-          </div>
-          <div style={css.remainingTiles}>
-            Remaining tiles:&nbsp;
-            {this.props.letters.count()}
+            {this.renderLetterPileImage()}
           </div>
         </div>
       </div>

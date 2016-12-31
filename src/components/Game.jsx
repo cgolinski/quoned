@@ -18,15 +18,29 @@ const css = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.brown,
+    flexDirection: 'column',
+  },
+  errorContainer: {
+    height: '60px',  
+  },
+  errors: {
+    color: colors.pink,
+    padding: '20px',
+    fontFamily: 'Futura',
+  },
+  hidden: {
+    display: 'none',
   },
 };
 
 class Game extends Component {
   static propTypes = {
-   
-    }; 
+    globalErrors: React.PropTypes.array.isRequired,
+  }; 
 
   render() {
+    var errorStyles = this.props.globalErrors.length > 0 ? css.errors : css.hidden;
+
     return (
       <div style={css.wholeGame}>
         <MenuBar 
@@ -34,9 +48,14 @@ class Game extends Component {
           nextPeelWins={this.props.nextPeelWins} 
           peel={this.props.peel} 
           bananas={this.props.bananas} 
-          globalErrors={this.props.globalErrors}
+          //globalErrors={this.props.globalErrors}
         />       
         <div style={css.playArea}>
+          <div style={css.errorContainer}>
+            <div style={errorStyles}>
+              {this.props.globalErrors}
+            </div>
+          </div>
           <PlayGrid 
             id="playArea" 
             gridData={this.props.gridData} 

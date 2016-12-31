@@ -7,8 +7,10 @@ export const colors = {
 	tan: '#D3B88C',
 	white: '#F4F2F3',
 
+	pink: '#C77878',
 	lightBrown: '#614417',
 	darkBrown: '#2D1C00',
+	darkTan: '#C8AD81',
 };
 
 

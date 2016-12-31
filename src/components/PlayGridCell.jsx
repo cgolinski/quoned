@@ -11,7 +11,7 @@ const css = {
     padding: '0px',
   },
   error: {
-    backgroundColor: 'yellow',
+    backgroundColor: colors.pink,
   },
   letter: {
     fontSize: '24px',

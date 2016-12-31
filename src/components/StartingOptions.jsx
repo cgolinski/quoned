@@ -55,6 +55,7 @@ const css = {
     padding: '4px 16px 4px 16px',
     margin: '45px',
     borderRadius: '20px',
+    border: 'none',
   },
 }
 

@@ -11,8 +11,8 @@ var css = {
     flexFlow: 'column', 
     color: colors.white,
     fontSize: '18px',
-    border: '1px solid black',
-    backgroundColor: colors.green,
+    border: 'none',
+    backgroundColor: colors.grey,
     minWidth: '100px', 
     marginLeft: '0px',
   },
@@ -30,7 +30,7 @@ class MenuBar extends Component {
     peel: React.PropTypes.func.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
     gameStarted: React.PropTypes.bool.isRequired,
-    globalErrors: React.PropTypes.array.isRequired,
+    //globalErrors: React.PropTypes.array.isRequired,
   };
 
   render() {
@@ -46,7 +46,7 @@ class MenuBar extends Component {
               nextPeelWins={this.props.nextPeelWins} 
               peel={this.props.peel} 
               bananas={this.props.bananas} 
-              globalErrors={this.props.globalErrors}
+              //globalErrors={this.props.globalErrors}
             /> 
           {/*
           : <StartingOptions 
