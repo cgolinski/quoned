@@ -1,14 +1,22 @@
 *** To Do ***
 
 Next feature: 
-1. - Redesign
+1. - Put online	
+			Buy domain name
+			Get S3 account 
+			Make an S3 bucket
+			Produce a production build for uploading to S3
+			Upload files to S3 bucket
+			Configure S3 bucket to serve website
+			Point domain DNS to Amazon
+
 
 2. - Create game over status when all tiles placed
    - When game over, check all words are connected, all words are in dictionary
 
-3. - Put online	
 
 
+- Force number of players to be selected before game starts
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
 - Connect to server
 - Create one board per player
@@ -21,9 +29,11 @@ Next feature:
 
 - Make more secure by doing word validation on server side (currently on client side)
 - Remove blue outline from around buttons (e.g. Peel) when clicked. Set other hover and click styles.
- 
+
 
 
 *** Issues ***
 
 - Plus sign briefly flashes as tile starts being dragged.
+
+

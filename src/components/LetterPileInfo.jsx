@@ -114,14 +114,14 @@ class LetterPileInfo extends Component {
       <div style={css.letterPileInfo}>
         <div style={css.infoTop}>
           <div style={css.gameTitle}>
-            Letter Game!
+            Quoned!
           </div>
           <div>
             <button style={peelStyles} type="button" value="Peel" onClick={this.props.peel}>
-              Peel
+              Letter
             </button>
             <button style={bananasStyles} type="button" value="Bananas" onClick={this.props.bananas}>
-              Bananas
+              Game
             </button>
           </div>
         </div>

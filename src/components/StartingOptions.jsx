@@ -107,7 +107,7 @@ class StartingOptions extends Component {
     return (
       <div>
         <div style={css.gameTitle}>
-          Letter Game!
+          Quoned!
         </div>
         <form style={css.startingOptionsForm} onSubmit={this.handleSubmit}>
           <div style={css.numOfPlayersForm}>
