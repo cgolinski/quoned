@@ -2,7 +2,8 @@
 
 Next feature: 
 1. - Put online	
-			Buy domain name
+			Merge into master?
+			DONE: Buy domain name
 			Get S3 account 
 			Make an S3 bucket
 			Produce a production build for uploading to S3
