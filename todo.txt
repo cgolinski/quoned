@@ -1,22 +1,14 @@
 *** To Do ***
 
 Next feature: 
-1. - Put online	
-			Merge into master?
-			DONE: Buy domain name
-			Get S3 account 
-			Make an S3 bucket
-			Produce a production build for uploading to S3
-			Upload files to S3 bucket
-			Configure S3 bucket to serve website
-			Point domain DNS to Amazon
-
-
-2. - Create game over status when all tiles placed
+1. - Create game over status when all tiles placed
    - When game over, check all words are connected, all words are in dictionary
 
 
-
+- Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
+- Make site responsive (test on phones)
+- Make Futura font or alternate font available on other browser
+- Add favicon
 - Force number of players to be selected before game starts
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
 - Connect to server
