@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LetterPileInfo from './LetterPileInfo.jsx';
 import StartingOptions from './StartingOptions.jsx';
+import GameOverBanner from './GameOverBanner.jsx';
 import {colors} from '../helpers/colors.js';
 
 
@@ -15,12 +16,26 @@ var css = {
     backgroundColor: colors.grey,
     minWidth: '100px', 
     marginLeft: '0px',
+    position: 'relative',
   },
+  /*
+  gameOverBanner: {
+    position: 'absolute',
+    display: 'block',
+    height: '80%',
+    width: '80%',
+    backgroundColor: colors.tan,
+    marginLeft: '10%',
+    top: '0',
+    fontSize: '18px',
+    fontFamily: 'Futura',
+    boxSizing: 'border-box',
+    padding: '20px 0px 0px 0px',
+    textAlign: 'center',
+  },
+  */
   hidden: {
     display: 'none',
-  },
-  startingOptions: {
-    border: '1px solid black',
   },
 };
 
@@ -30,31 +45,24 @@ class MenuBar extends Component {
     peel: React.PropTypes.func.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
     gameStarted: React.PropTypes.bool.isRequired,
-    //globalErrors: React.PropTypes.array.isRequired,
+    gameOver: React.PropTypes.bool.isRequired,
   };
 
   render() {
     return (
       <div style={css.menuBar}>
-        {/*
         {
-          this.props.gameStarted
-          ? */}
-          <LetterPileInfo 
-              style={css.hidden} 
-              letters={this.props.letters} 
-              nextPeelWins={this.props.nextPeelWins} 
-              peel={this.props.peel} 
-              bananas={this.props.bananas} 
-              //globalErrors={this.props.globalErrors}
-            /> 
-          {/*
-          : <StartingOptions 
-              style={css.startingOptions} 
-              startGame={this.props.startGame}
-            /> 
+          this.props.gameOver 
+          ? <GameOverBanner />
+          : null
         }
-      */}
+        <LetterPileInfo 
+          style={css.hidden} 
+          letters={this.props.letters} 
+          nextPeelWins={this.props.nextPeelWins} 
+          peel={this.props.peel} 
+          bananas={this.props.bananas} 
+        /> 
       </div>
     );
   }

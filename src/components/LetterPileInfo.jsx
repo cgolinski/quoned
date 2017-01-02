@@ -108,7 +108,6 @@ class LetterPileInfo extends Component {
   render() {
     var peelStyles = this.props.nextPeelWins ? css.hidden : css.peel;
     var bananasStyles = this.props.nextPeelWins ? css.bananas : css.hidden;
-    //var errorStyles = this.props.globalErrors.length > 0 ? css.errors : css.hidden;
 
     return (
       <div style={css.letterPileInfo}>

@@ -48,7 +48,7 @@ class Game extends Component {
           nextPeelWins={this.props.nextPeelWins} 
           peel={this.props.peel} 
           bananas={this.props.bananas} 
-          //globalErrors={this.props.globalErrors}
+          gameOver={this.props.gameOver} 
         />       
         <div style={css.playArea}>
           <div style={css.errorContainer}>

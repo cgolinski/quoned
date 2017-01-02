@@ -10,7 +10,9 @@ import {createGridData, fillGridData, clearErrors} from '../model/GridData.js';
 var rowCount = 10;
 var colCount = 10;
 
-const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
+const ALL_LETTERS = 'cat';
+//const ALL_LETTERS = 'herearetestingletters';
+//const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
 var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
 const css = {
@@ -108,8 +110,10 @@ class App extends Component {
 
     if (hasErrors) {
       setNonWordErrorCells(this.state.gridData, nonWords);
-    } else {
+    } else if (!this.state.nextPeelWins) {
       fillGridData(this.state.gridData, letterPile.peel(1));
+    } else {
+      return this.setGameOver();
     }
 
     this.setState({
@@ -120,7 +124,14 @@ class App extends Component {
     });
   }
 
-  bananas() {
+  setGameOver() {
+    console.log('setState to Game Over');
+    this.setState({
+      gameOver: true,
+    });
+  }
+
+  bananas() { //remove this button and just change the name of the peel button when nextPeelWins    
     this.peel();
   }
 
@@ -148,6 +159,7 @@ class App extends Component {
         {
           this.state.gameStarted
           ? <Game 
+              gameOver={this.state.gameOver} 
               letters={letterPile}
               nextPeelWins={this.state.nextPeelWins} 
               peel={this.peel.bind(this)} 
