@@ -53,7 +53,7 @@ class MenuBar extends Component {
       <div style={css.menuBar}>
         {
           this.props.gameOver 
-          ? <GameOverBanner />
+          ? <GameOverBanner startGame={this.props.startGame} />
           : null
         }
         <LetterPileInfo 

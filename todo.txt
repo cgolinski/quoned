@@ -15,12 +15,12 @@ Next feature:
 When game over (bananas clicked?), setState(game over: true)
 Game Over component gets loaded into MenuBar (left half of Game screen)
 
-restartGame function would live in App.jsx, get passed down as prop, and get called in gaveOverBanner when button is clicked.
+restartGame function would live in App.jsx, get passed down as prop, and get called in gameOverBanner when button is clicked.
 
-Same as starting new game, but some items in state get set or stay the same or get cleared
+restartGame is same as starting new game, but some items in state get set or stay the same or get cleared
 state for all game
 state that gets reset for each game --> get put into newGame function. That function gets called when you start the first game, and again when you restart game.
-If starting first game, then choose starting Optios, that sets persistent state items, and then calls newGame function which clears the other items in state.
+If starting first game, then choose starting Options, that sets persistent state items, and then calls newGame function which clears the other items in state.
 
 New Game: Starting options sets persistent state items. Calls newGame to wipe other state items. Calls function to render grid.
 Repeat Game: (Persistent state items don't get touched.) Clicking Play Again button calls newGame which creates new state items (empty Global Erros, new LetterPile, etc.) and then setsState which re-renders everything.

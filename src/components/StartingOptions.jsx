@@ -81,7 +81,7 @@ class StartingOptions extends Component {
     var data = getFormData(event.target);
 
     event.preventDefault();
-    this.props.startGame(data);
+    this.props.startGame();
   }  
 
   handleOnClick(event) {

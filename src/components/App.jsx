@@ -11,9 +11,7 @@ var rowCount = 10;
 var colCount = 10;
 
 const ALL_LETTERS = 'cat';
-//const ALL_LETTERS = 'herearetestingletters';
 //const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
-var letterPile = new LetterPile(ALL_LETTERS.split(''));
 
 const css = {
   App: {
@@ -41,6 +39,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      letterPile: new LetterPile(ALL_LETTERS.split('')),
       gridData: null,
       nextPeelWins: false,
       originCell: undefined,
@@ -50,6 +49,7 @@ class App extends Component {
       numOfPlayers: null,
       showCellErrors: false,
       globalErrors: [],
+      gameOver: false,
     }; 
   }
 
@@ -111,14 +111,14 @@ class App extends Component {
     if (hasErrors) {
       setNonWordErrorCells(this.state.gridData, nonWords);
     } else if (!this.state.nextPeelWins) {
-      fillGridData(this.state.gridData, letterPile.peel(1));
+      fillGridData(this.state.gridData, this.state.letterPile.peel(1));
     } else {
       return this.setGameOver();
     }
 
     this.setState({
       gridData: this.state.gridData,
-      nextPeelWins: letterPile.count() < this.state.numOfPlayers,
+      nextPeelWins: this.state.letterPile.count() < this.state.numOfPlayers,
       showCellErrors: true,
       globalErrors: globalErrors,
     });
@@ -140,7 +140,7 @@ class App extends Component {
       [name]: value,
     });
   }
-
+/*
   startGame(data) {
     console.log('start game button was clicked');
 
@@ -151,7 +151,31 @@ class App extends Component {
       gameStarted: true,
       numOfPlayers: data.numOfPlayers,
     });
+  }
+  */  
+
+// beginning of refactoring 
+
+  startGame() {
+    this.state.gameOver ? this.state.letterPile = new LetterPile(ALL_LETTERS.split('')) : null;
+    var startingLetters = createStartingHand(startingTilesPerPlayer(this.state.numOfPlayers), this.state.letterPile);
+
+    this.setState({
+      nextPeelWins: false,
+      originCell: undefined,
+      showStartingOptions: true,
+      showLetterPileInfo: true,
+      gameStarted: true,
+      showCellErrors: false,
+      globalErrors: [],
+      gameOver: false,
+
+      letterPile: this.state.letterPile,
+      gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
+    });
   }  
+
+// end of refactoring
 
   render() {
     return (
@@ -160,7 +184,7 @@ class App extends Component {
           this.state.gameStarted
           ? <Game 
               gameOver={this.state.gameOver} 
-              letters={letterPile}
+              letters={this.state.letterPile}
               nextPeelWins={this.state.nextPeelWins} 
               peel={this.peel.bind(this)} 
               bananas={this.bananas.bind(this)} 
@@ -168,6 +192,7 @@ class App extends Component {
               gridData={this.state.gridData} 
               dragTile={this.dragTile.bind(this)} 
               dropTile={this.dropTile.bind(this)}
+              startGame={this.startGame.bind(this)}
             />
           : <MainMenu
               startGame={this.startGame.bind(this)} 

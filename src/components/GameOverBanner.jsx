@@ -56,7 +56,7 @@ class GameOverBanner extends Component {
     return (
       <div style={css.gameOverBanner}>
         <span style={css.gameOver}>You Win</span>
-        <button style={css.restartButton} type="submit" onClick={console.log("restart button clicked")}>Play again?</button>
+        <button style={css.restartButton} type="submit" onClick={this.props.startGame}>Play again?</button>
       </div>
     );
   }
