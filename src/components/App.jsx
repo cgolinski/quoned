@@ -13,8 +13,8 @@ import {findLengthOfLongestWord, findAvgLengthOfWords} from '../helpers/words.js
 var rowCount = 10;
 var colCount = 10;
 
-const ALL_LETTERS = 'cat';
-//const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
+//const ALL_LETTERS = 'cat';
+const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
 
 const css = {
   App: {
