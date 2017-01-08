@@ -11,6 +11,7 @@ export const colors = {
 	lightBrown: '#614417',
 	darkBrown: '#2D1C00',
 	darkTan: '#C8AD81',
+	darkGreen: '#759e76',
 };
 
 

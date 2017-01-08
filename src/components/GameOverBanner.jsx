@@ -9,52 +9,57 @@ var css = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '80%',
+    textAlign: 'center',
+    minHeight: '85%',
     width: '80%',
-    backgroundColor: colors.tan,
-    top: '0',
+    backgroundColor: colors.darkGreen,
+    top: '-3px',
     fontSize: '24px',
     fontFamily: 'Futura',
+    border: '3px double ' + colors.green,
+    borderRadius: '4px',
     boxSizing: 'border-box',
     padding: '20px 0px 20px 0px',
     marginLeft: '10%',
   },
   gameOver: {
+    display: 'inline-block',
     fontFamily: 'Futura',
     textTransform: 'uppercase',
+    padding: '0px 0px 10px 0px',
+    borderBottom: '1px solid ' + colors.green,
   },
   stats: {
     fontSize: '16px',
     fontFamily: 'Futura',
+    paddingTop: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    top: '0px',
   },
-  wordCount: {
+  statsLevel1: {
     fontSize: '16px',
-    fontFamily: 'Futura',
-  },
-  longestWord: {
-    marginTop: '20px',
   },
   statsLevel2: {
-    fontSize: '12px',
-  },
-  avgWordLength: {
-    marginTop: '20px',
-  },
-  timeElapsed: {
-    marginTop: '20px',
+    fontSize: '36px',
+    fontWeight: 'normal',
+    paddingTop: '3px',
+    paddingBottom: '10px',
   },
   restartButton: {
     display: 'block',
-    backgroundColor: colors.green,
+    backgroundColor: colors.white,
     borderRadius: '20px',
     border: 'none',
     fontFamily: 'Futura',
     textTransform: 'uppercase',
-    color: colors.white,
+    color: colors.darkGreen,
     fontWeight: 'bold',
     fontSize: '16px',
     textDecoration: 'none',
-    padding: '7%',
+    padding: '10px 15px',
   },
 };
 
@@ -71,8 +76,10 @@ class GameOverBanner extends Component {
 
   renderTimeElapsed() {
     return (
-      <div style={css.timeElapsed}>
-        <span> Time Elapsed: </span>
+      <div>
+        <div style={css.statsLevel1}>
+          Time Elapsed
+        </div>
         <div style={css.statsLevel2}>
           {
             this.props.elapsedHours > 0 
@@ -90,35 +97,39 @@ class GameOverBanner extends Component {
             {timePad(this.props.timeElapsed.seconds)}
           </span>
         </div>
-      </div>
+      </div>  
     );
   }
 
   render() {
     return (
       <div style={css.gameOverBanner}>
-        <span style={css.gameOver}>You Win</span>
-        <div style={css.stats}>
-          <div style={css.wordCount}>
-            <span>Word count: </span>
-            {this.props.wordCount}
+        <div>
+          <div>
+            <span style={css.gameOver}>You Win</span>
           </div>
-          <div style={css.longestWord}>
-            <span> Longest Word: </span>
-            <div style={css.statsLevel2}>
-              <div>{this.props.longestWord.word}</div>
-              {this.props.longestWord.length}
-              <span> letters</span>
+          <div style={css.stats}>
+            <div style={css.statsLevel1}>
+              Words
             </div>
-          </div>
-          <div style={css.avgWordLength}>
-            <span>Average Word Length: </span> 
+            <div style={css.statsLevel2}>
+              {this.props.wordCount}
+            </div>
+            <div style={css.statsLevel1}>
+              Longest Word
+            </div>
+            <div style={css.statsLevel2}>
+              {/*<div>{this.props.longestWord.word}</div>*/}
+              {this.props.longestWord.length}
+            </div>
+            <div style={css.statsLevel1}>
+              Average Word Length
+            </div>  
             <div style={css.statsLevel2}>
               {this.props.avgWordLength}
-              <span> letters</span>
             </div>
+            {this.renderTimeElapsed()}
           </div>
-          {this.renderTimeElapsed()}
         </div>
         <button style={css.restartButton} type="submit" onClick={this.props.startGame}>Play again?</button>
       </div>
