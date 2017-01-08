@@ -6,6 +6,9 @@ import {createStartingHand} from '../model/LetterPile.js';
 import dictionary from '../model/dictionary.js';
 import {findWords, checkWords, setNonWordErrorCells, removeSingleLetterWords, checkLettersConnected} from '../model/GridData.js';
 import {createGridData, fillGridData, clearErrors} from '../model/GridData.js';
+import {findTimeElapsed} from '../helpers/time.js';
+import {findLengthOfLongestWord, findAvgLengthOfWords} from '../helpers/words.js';
+
 
 var rowCount = 10;
 var colCount = 10;
@@ -52,17 +55,44 @@ class App extends Component {
       gameOver: false,
       allWords: [],
       wordCount: null,
-      longestWord: null,
-      longestWordLength: null,
+      longestWord: {
+        word: null,
+        length: null,
+      },
       avgWordLength: null,
       startTime: null,
       endTime: null,
-      elapsedSeconds: null,
-      elapsedMinutes: null,
-      elapsedHours: null,
-      elapsedDays: null,
+      timeElapsed: null,
     }; 
   }
+
+  setStartingOption(name, value) {
+    this.setState({
+      [name]: value,
+    });
+  } 
+
+  startGame() {
+    this.state.gameOver ? this.state.letterPile = new LetterPile(ALL_LETTERS.split('')) : null;
+    var startingLetters = createStartingHand(startingTilesPerPlayer(this.state.numOfPlayers), this.state.letterPile);
+
+    var startTime = new Date();
+    //only updates states that are not persistent for restarted games
+    this.setState({
+      nextPeelWins: false,
+      originCell: undefined,
+      showStartingOptions: true,
+      showLetterPileInfo: true,
+      gameStarted: true,
+      showCellErrors: false,
+      globalErrors: [],
+      gameOver: false,
+
+      startTime: startTime,
+      letterPile: this.state.letterPile,
+      gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
+    });
+  }  
 
   dragTile(row, column) {
     this.setState({
@@ -135,95 +165,26 @@ class App extends Component {
     });
   }
 
-  setGameOver() {
-    console.log('setState to Game Over');
-    var endTime = new Date();
-    
-    this.findLengthOfLongestWord(this.state.allWords);
-    this.findAvgLengthOfWords(this.state.allWords);
-
-    this.setState({
-      gameOver: true,
-      endTime : endTime,
-    });
-  }
-
-  findLengthOfLongestWord(allWords) {
-    var longestWord;
-    var longestWordLength = 0;
-    for (var i = 0; i < allWords.length; i++) {
-      if (allWords[i].word.length > longestWordLength) {
-        longestWord = allWords[i].word;
-        longestWordLength = allWords[i].word.length;
-      }
-    }
-    this.setState({
-      longestWord: longestWord,
-      longestWordLength: longestWordLength,
-    });
-  }
-
-  findAvgLengthOfWords(allWords) {
-    var totalLetters = 0;
-    for (var i = 0; i < allWords.length; i++) {
-      totalLetters += allWords[i].word.length
-    }
-    var avgLength = totalLetters / allWords.length;
-    this.setState({
-      avgWordLength: avgLength,
-    }); 
-  }
-
-  findTimeElapsed() {
-    console.log('findTimeElapsed was called')
-    var timeDiff = this.state.endTime - this.state.startTime;
-    var seconds = Math.round((timeDiff /= 1000) % 60);
-    timeDiff = Math.floor(timeDiff / 60);
-    var minutes = Math.round(timeDiff % 60);
-    timeDiff = Math.floor(timeDiff / 60);
-    var hours = Math.round(timeDiff % 24);
-    timeDiff = Math.floor(timeDiff / 24);
-    var days = timeDiff;
-
-    this.setState({
-      elapsedSeconds: seconds,
-      elapsedMinutes: minutes,
-      elapsedHours: hours,
-      elapsedDays: days,
-    });
-  }
-
-  bananas() { //remove this button and just change the name of the peel button when nextPeelWins    
+  bananas() { 
     this.peel();
   }
 
-  setStartingOption(name, value) {
+  setGameOver() {
+    console.log('setState to Game Over');
+    this.state.endTime = new Date();
+    
+    var longestWord = findLengthOfLongestWord(this.state.allWords.map(obj => obj.word));
+    var avgWordLength = findAvgLengthOfWords(this.state.allWords.map(obj => obj.word));
+    var timeElapsed = findTimeElapsed(this.state.startTime, this.state.endTime);
+
     this.setState({
-      [name]: value,
+      gameOver: true,
+      endTime : this.state.endTime,
+      timeElapsed: timeElapsed,
+      longestWord: longestWord,
+      avgWordLength: avgWordLength,
     });
-  } 
-
-  startGame() {
-    this.state.gameOver ? this.state.letterPile = new LetterPile(ALL_LETTERS.split('')) : null;
-    var startingLetters = createStartingHand(startingTilesPerPlayer(this.state.numOfPlayers), this.state.letterPile);
-
-    var startTime = new Date();
-    //only updates states that are not persistent for restarted games
-    this.setState({
-      nextPeelWins: false,
-      originCell: undefined,
-      showStartingOptions: true,
-      showLetterPileInfo: true,
-      gameStarted: true,
-      showCellErrors: false,
-      globalErrors: [],
-      gameOver: false,
-
-      startTime: startTime,
-      letterPile: this.state.letterPile,
-      gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
-    });
-  }  
+  }
 
   render() {
     return (
@@ -243,12 +204,8 @@ class App extends Component {
               startGame={this.startGame.bind(this)}
               wordCount={this.state.wordCount}
               longestWord={this.state.longestWord}
-              longestWordLength={this.state.longestWordLength}
               avgWordLength={this.state.avgWordLength}
-              elapsedSeconds={this.state.elapsedSeconds}
-              elapsedMinutes={this.state.elapsedMinutes}
-              elapsedHours={this.state.elapsedHours}
-              elapsedDays={this.state.elapsedDays}
+              timeElapsed={this.state.timeElapsed}
             />
           : <MainMenu
               startGame={this.startGame.bind(this)} 

@@ -1,14 +1,14 @@
 *** To Do ***
 
 Next feature: 
-1. Game Over
-   - Stats screen
-   	 - time elapsed
-   	 - # moves
-   	 - # words
-   	 - longest word
-   	 - average word length
+1. Redesign (see email)
+2. Release update to live site
 
+
+
+
+
+- remove bananas button and just change the name of the peel button when nextPeelWins
 
 - Achievements as you go? (5-letter word, 6-letter word, etc. win with <5 words, use certain jargon words, win with no dumping, win in < 5 mins, all words start with same letter, all words longer than 4 letters, )
 - Merge MainMenu.jsx and StartingOptions.jsx
@@ -31,10 +31,12 @@ Next feature:
 - Make more secure by doing word validation on server side (currently on client side)
 - Remove blue outline from around buttons (e.g. Peel) when clicked. Set other hover and click styles.
 
-
+- Cross browser test
+- Cross device test
 
 *** Issues ***
 
 - Plus sign briefly flashes as tile starts being dragged.
+- Styles and dragging broken in Firefox
 
 

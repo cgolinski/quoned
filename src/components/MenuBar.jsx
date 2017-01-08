@@ -28,7 +28,6 @@ class MenuBar extends Component {
     letters: React.PropTypes.object.isRequired,
     peel: React.PropTypes.func.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
-    gameStarted: React.PropTypes.bool.isRequired,
     gameOver: React.PropTypes.bool.isRequired,
   };
 
@@ -41,12 +40,8 @@ class MenuBar extends Component {
               startGame={this.props.startGame} 
               wordCount={this.props.wordCount}
               longestWord={this.props.longestWord}
-              longestWordLength={this.props.longestWordLength}
               avgWordLength={this.props.avgWordLength}
-              elapsedSeconds={this.props.elapsedSeconds}
-              elapsedMinutes={this.props.elapsedMinutes}
-              elapsedHours={this.props.elapsedHours}
-              elapsedDays={this.props.elapsedDays}
+              timeElapsed={this.props.timeElapsed}
             />
           : null
         }

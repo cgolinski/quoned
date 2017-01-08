@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {colors} from '../helpers/colors.js';
-
+import {timePad} from '../helpers/time.js';
 
 var css = {
   gameOverBanner: {
@@ -69,6 +69,31 @@ class GameOverBanner extends Component {
   };
   */
 
+  renderTimeElapsed() {
+    return (
+      <div style={css.timeElapsed}>
+        <span> Time Elapsed: </span>
+        <div style={css.statsLevel2}>
+          {
+            this.props.elapsedHours > 0 
+            ? <span>
+                {timePad(this.props.timeElapsed.hours)}
+                <span>:</span>
+              </span>
+            : null
+          }
+          <span>
+            {timePad(this.props.timeElapsed.minutes)}
+            <span>:</span>
+           </span> 
+           <span>
+            {timePad(this.props.timeElapsed.seconds)}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div style={css.gameOverBanner}>
@@ -81,8 +106,8 @@ class GameOverBanner extends Component {
           <div style={css.longestWord}>
             <span> Longest Word: </span>
             <div style={css.statsLevel2}>
-              <div>{this.props.longestWord}</div>
-              {this.props.longestWordLength}
+              <div>{this.props.longestWord.word}</div>
+              {this.props.longestWord.length}
               <span> letters</span>
             </div>
           </div>
@@ -93,27 +118,7 @@ class GameOverBanner extends Component {
               <span> letters</span>
             </div>
           </div>
-          <div style={css.timeElapsed}>
-            <span> Time Elapsed: </span>
-            <div style={css.statsLevel2}>
-              <div>
-                {this.props.elapsedDays}
-                Days
-              </div>
-              <div>
-                {this.props.elapsedHours}
-                Hours
-              </div>
-              <div>
-                {this.props.elapsedMinutes}
-                Minutes
-               </div> 
-               <div>
-                {this.props.elapsedSeconds}
-                Seconds
-              </div>
-            </div>
-          </div>
+          {this.renderTimeElapsed()}
         </div>
         <button style={css.restartButton} type="submit" onClick={this.props.startGame}>Play again?</button>
       </div>
