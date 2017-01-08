@@ -50,6 +50,14 @@ class Game extends Component {
           bananas={this.props.bananas} 
           gameOver={this.props.gameOver} 
           startGame={this.props.startGame}
+          wordCount={this.props.wordCount}
+          longestWord={this.props.longestWord}
+          longestWordLength={this.props.longestWordLength}
+          avgWordLength={this.props.avgWordLength}
+          elapsedSeconds={this.props.elapsedSeconds}
+          elapsedMinutes={this.props.elapsedMinutes}
+          elapsedHours={this.props.elapsedHours}
+          elapsedDays={this.props.elapsedDays}
         />       
         <div style={css.playArea}>
           <div style={css.errorContainer}>

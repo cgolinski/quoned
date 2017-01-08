@@ -50,6 +50,17 @@ class App extends Component {
       showCellErrors: false,
       globalErrors: [],
       gameOver: false,
+      allWords: [],
+      wordCount: null,
+      longestWord: null,
+      longestWordLength: null,
+      avgWordLength: null,
+      startTime: null,
+      endTime: null,
+      elapsedSeconds: null,
+      elapsedMinutes: null,
+      elapsedHours: null,
+      elapsedDays: null,
     }; 
   }
 
@@ -101,11 +112,9 @@ class App extends Component {
 
     clearErrors(this.state.gridData);
 
-    var allWords = findWords(this.state.gridData);
+    var allWords = removeSingleLetterWords(findWords(this.state.gridData));
     var nonWords = checkWords(allWords, dictionary);
-    
-    nonWords = removeSingleLetterWords(nonWords);
-    
+        
     var hasErrors = nonWords.length !== 0 || !lettersConnected;
 
     if (hasErrors) {
@@ -121,13 +130,66 @@ class App extends Component {
       nextPeelWins: this.state.letterPile.count() < this.state.numOfPlayers,
       showCellErrors: true,
       globalErrors: globalErrors,
+      allWords: allWords,
+      wordCount: allWords.length,
     });
   }
 
   setGameOver() {
     console.log('setState to Game Over');
+    var endTime = new Date();
+    
+    this.findLengthOfLongestWord(this.state.allWords);
+    this.findAvgLengthOfWords(this.state.allWords);
+
     this.setState({
       gameOver: true,
+      endTime : endTime,
+    });
+  }
+
+  findLengthOfLongestWord(allWords) {
+    var longestWord;
+    var longestWordLength = 0;
+    for (var i = 0; i < allWords.length; i++) {
+      if (allWords[i].word.length > longestWordLength) {
+        longestWord = allWords[i].word;
+        longestWordLength = allWords[i].word.length;
+      }
+    }
+    this.setState({
+      longestWord: longestWord,
+      longestWordLength: longestWordLength,
+    });
+  }
+
+  findAvgLengthOfWords(allWords) {
+    var totalLetters = 0;
+    for (var i = 0; i < allWords.length; i++) {
+      totalLetters += allWords[i].word.length
+    }
+    var avgLength = totalLetters / allWords.length;
+    this.setState({
+      avgWordLength: avgLength,
+    }); 
+  }
+
+  findTimeElapsed() {
+    console.log('findTimeElapsed was called')
+    var timeDiff = this.state.endTime - this.state.startTime;
+    var seconds = Math.round((timeDiff /= 1000) % 60);
+    timeDiff = Math.floor(timeDiff / 60);
+    var minutes = Math.round(timeDiff % 60);
+    timeDiff = Math.floor(timeDiff / 60);
+    var hours = Math.round(timeDiff % 24);
+    timeDiff = Math.floor(timeDiff / 24);
+    var days = timeDiff;
+
+    this.setState({
+      elapsedSeconds: seconds,
+      elapsedMinutes: minutes,
+      elapsedHours: hours,
+      elapsedDays: days,
     });
   }
 
@@ -139,27 +201,14 @@ class App extends Component {
     this.setState({
       [name]: value,
     });
-  }
-/*
-  startGame(data) {
-    console.log('start game button was clicked');
-
-    var startingLetters = createStartingHand(startingTilesPerPlayer(data.numOfPlayers), letterPile);
-
-    this.setState({
-      gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
-      gameStarted: true,
-      numOfPlayers: data.numOfPlayers,
-    });
-  }
-  */  
-
-// beginning of refactoring 
+  } 
 
   startGame() {
     this.state.gameOver ? this.state.letterPile = new LetterPile(ALL_LETTERS.split('')) : null;
     var startingLetters = createStartingHand(startingTilesPerPlayer(this.state.numOfPlayers), this.state.letterPile);
 
+    var startTime = new Date();
+    //only updates states that are not persistent for restarted games
     this.setState({
       nextPeelWins: false,
       originCell: undefined,
@@ -170,12 +219,11 @@ class App extends Component {
       globalErrors: [],
       gameOver: false,
 
+      startTime: startTime,
       letterPile: this.state.letterPile,
       gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
     });
   }  
-
-// end of refactoring
 
   render() {
     return (
@@ -193,6 +241,14 @@ class App extends Component {
               dragTile={this.dragTile.bind(this)} 
               dropTile={this.dropTile.bind(this)}
               startGame={this.startGame.bind(this)}
+              wordCount={this.state.wordCount}
+              longestWord={this.state.longestWord}
+              longestWordLength={this.state.longestWordLength}
+              avgWordLength={this.state.avgWordLength}
+              elapsedSeconds={this.state.elapsedSeconds}
+              elapsedMinutes={this.state.elapsedMinutes}
+              elapsedHours={this.state.elapsedHours}
+              elapsedDays={this.state.elapsedDays}
             />
           : <MainMenu
               startGame={this.startGame.bind(this)} 

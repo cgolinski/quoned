@@ -18,22 +18,6 @@ var css = {
     marginLeft: '0px',
     position: 'relative',
   },
-  /*
-  gameOverBanner: {
-    position: 'absolute',
-    display: 'block',
-    height: '80%',
-    width: '80%',
-    backgroundColor: colors.tan,
-    marginLeft: '10%',
-    top: '0',
-    fontSize: '18px',
-    fontFamily: 'Futura',
-    boxSizing: 'border-box',
-    padding: '20px 0px 0px 0px',
-    textAlign: 'center',
-  },
-  */
   hidden: {
     display: 'none',
   },
@@ -53,7 +37,17 @@ class MenuBar extends Component {
       <div style={css.menuBar}>
         {
           this.props.gameOver 
-          ? <GameOverBanner startGame={this.props.startGame} />
+          ? <GameOverBanner 
+              startGame={this.props.startGame} 
+              wordCount={this.props.wordCount}
+              longestWord={this.props.longestWord}
+              longestWordLength={this.props.longestWordLength}
+              avgWordLength={this.props.avgWordLength}
+              elapsedSeconds={this.props.elapsedSeconds}
+              elapsedMinutes={this.props.elapsedMinutes}
+              elapsedHours={this.props.elapsedHours}
+              elapsedDays={this.props.elapsedDays}
+            />
           : null
         }
         <LetterPileInfo 
