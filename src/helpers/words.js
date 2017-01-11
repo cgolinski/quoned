@@ -18,6 +18,6 @@ export function findAvgLengthOfWords(words) {
   for (var i = 0; i < words.length; i++) {
     totalLetters += words[i].length
   }
-  var avgLength = totalLetters / words.length;
+  var avgLength = Math.round(totalLetters / words.length);
   return avgLength;
 };

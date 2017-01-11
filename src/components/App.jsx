@@ -13,8 +13,9 @@ import {findLengthOfLongestWord, findAvgLengthOfWords} from '../helpers/words.js
 var rowCount = 10;
 var colCount = 10;
 
-//const ALL_LETTERS = 'cat';
-const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
+const ALL_LETTERS = 'cat';
+//const ALL_LETTERS = 'appleeachperlum';
+//const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
 
 const css = {
   App: {
@@ -172,9 +173,11 @@ class App extends Component {
   setGameOver() {
     console.log('setState to Game Over');
     this.state.endTime = new Date();
+
+    var words = this.state.allWords.map(obj => obj.word);
     
-    var longestWord = findLengthOfLongestWord(this.state.allWords.map(obj => obj.word));
-    var avgWordLength = findAvgLengthOfWords(this.state.allWords.map(obj => obj.word));
+    var longestWord = findLengthOfLongestWord(words);
+    var avgWordLength = findAvgLengthOfWords(words);
     var timeElapsed = findTimeElapsed(this.state.startTime, this.state.endTime);
 
     this.setState({

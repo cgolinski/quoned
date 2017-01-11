@@ -1,24 +1,45 @@
 *** To Do ***
 
 Next feature: 
-1. Redesign (see email)
-2. Release update to live site
+
+
+
+- Transition-in the game over banner
+
+css = {};
+
+css.banner = {
+	top = '-85%',
+	transition = 'top 0.5s ease-out',
+	color = ...
+};
+
+css.bannerGameOver = object.assign({}; css.banner, {'top: 0'});
+
+<div style={this.props.gameOver ? css.bannerGameOver : css.banner}>
 
 
 
 
+- Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
+- Add favicon
+- Remove blue outline from around buttons (e.g. Peel) when clicked. 
+- Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
+- Set hover and click styles.
+- Make site responsive (test on phones)
+- Cross browser test
+- Cross device test
+- Clean up
+	- remove bananas button and just change the name of the peel button when nextPeelWins
+	- Merge MainMenu.jsx and StartingOptions.jsx
+	- Merge MenuBar.jsx and LetterPileInfo.jsx
+	
 
-- remove bananas button and just change the name of the peel button when nextPeelWins
 
 - Achievements as you go? (5-letter word, 6-letter word, etc. win with <5 words, use certain jargon words, win with no dumping, win in < 5 mins, all words start with same letter, all words longer than 4 letters, )
-- Merge MainMenu.jsx and StartingOptions.jsx
-- Merge MenuBar.jsx and LetterPileInfo.jsx
-- Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
-- Make site responsive (test on phones)
+
 - Make Futura font or alternate font available on other browser
-- Add favicon
 - Force number of players to be selected before game starts
-- Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
 - Connect to server
 - Create one board per player
 - Render small version of other players' boards in each player's view
@@ -29,14 +50,16 @@ Next feature:
 	- themes (all words from certain category)
 
 - Make more secure by doing word validation on server side (currently on client side)
-- Remove blue outline from around buttons (e.g. Peel) when clicked. Set other hover and click styles.
 
-- Cross browser test
-- Cross device test
+- Add tiny "quoned?" on homepage and link to Seinfeld video.
+
+
 
 *** Issues ***
 
 - Plus sign briefly flashes as tile starts being dragged.
 - Styles and dragging broken in Firefox
+- In production version, "All words must be connected" doesn't disappear when a letter is moved after peel.
+- In production version, in gameOverBanner, Average Word Length is 54545454545454...
 
 
