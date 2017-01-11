@@ -3,25 +3,6 @@ import {colors} from '../helpers/colors.js';
 import {timePad} from '../helpers/time.js';
 
 var css = {
-  gameOverBanner: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    textAlign: 'center',
-    minHeight: '85%',
-    width: '80%',
-    backgroundColor: colors.darkGreen,
-    top: '-3px',
-    fontSize: '24px',
-    fontFamily: 'Futura',
-    border: '3px double ' + colors.green,
-    borderRadius: '4px',
-    boxSizing: 'border-box',
-    padding: '20px 0px 20px 0px',
-    marginLeft: '10%',
-  },
   gameOver: {
     display: 'inline-block',
     fontFamily: 'Futura',
@@ -63,6 +44,29 @@ var css = {
   },
 };
 
+css.gameOverBanner = {
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  textAlign: 'center',
+  minHeight: '85%',
+  width: '80%',
+  backgroundColor: colors.darkGreen,
+  top: '-85%',
+  fontSize: '24px',
+  fontFamily: 'Futura',
+  border: '3px double ' + colors.green,
+  borderRadius: '4px',
+  boxSizing: 'border-box',
+  padding: '20px 0px 20px 0px',
+  marginLeft: '10%',
+  transition: 'top 0.8s ease-out',
+};
+
+css.gameOverBannerShowing = Object.assign({},css.gameOverBanner, {top: '-3px',});
+
 class GameOverBanner extends Component {
   /*
   static propTypes = {
@@ -103,7 +107,7 @@ class GameOverBanner extends Component {
 
   render() {
     return (
-      <div style={css.gameOverBanner}>
+      <div style={this.props.gameOver ? css.gameOverBannerShowing : css.gameOverBanner}>
         <div>
           <div>
             <span style={css.gameOver}>You Win</span>
@@ -128,7 +132,7 @@ class GameOverBanner extends Component {
             <div style={css.statsLevel2}>
               {this.props.avgWordLength}
             </div>
-            {this.renderTimeElapsed()}
+            {this.props.gameOver ? this.renderTimeElapsed() : null}
           </div>
         </div>
         <button style={css.restartButton} type="submit" onClick={this.props.startGame}>Play again?</button>

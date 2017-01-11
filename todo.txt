@@ -53,13 +53,12 @@ css.bannerGameOver = object.assign({}; css.banner, {'top: 0'});
 
 - Add tiny "quoned?" on homepage and link to Seinfeld video.
 
+- Make "All words must be connected" disappear when a letter is moved after peel.
 
 
 *** Issues ***
 
 - Plus sign briefly flashes as tile starts being dragged.
 - Styles and dragging broken in Firefox
-- In production version, "All words must be connected" doesn't disappear when a letter is moved after peel.
-- In production version, in gameOverBanner, Average Word Length is 54545454545454...
 
 

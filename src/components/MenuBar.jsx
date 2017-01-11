@@ -23,30 +23,6 @@ var css = {
   },
 };
 
-/*
-css.gameOverBanner = {
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  textAlign: 'center',
-  minHeight: '85%',
-  width: '80%',
-  backgroundColor: colors.darkGreen,
-  top: '-85%',
-  fontSize: '24px',
-  fontFamily: 'Futura',
-  border: '3px double ' + colors.green,
-  borderRadius: '4px',
-  boxSizing: 'border-box',
-  padding: '20px 0px 20px 0px',
-  marginLeft: '10%',
-};
-
-css.gameOverBannerShowing = Object.assign({},css.gameOverBanner, {top: '-3px',});
-*/
-
 class MenuBar extends Component {
   static propTypes = {
     letters: React.PropTypes.object.isRequired,
@@ -58,17 +34,14 @@ class MenuBar extends Component {
   render() {
     return (
       <div style={css.menuBar}>
-        {
-          this.props.gameOver 
-          ? <GameOverBanner 
-              startGame={this.props.startGame} 
-              wordCount={this.props.wordCount}
-              longestWord={this.props.longestWord}
-              avgWordLength={this.props.avgWordLength}
-              timeElapsed={this.props.timeElapsed}
-            />
-          : null
-        }
+        <GameOverBanner 
+          startGame={this.props.startGame} 
+          wordCount={this.props.wordCount}
+          longestWord={this.props.longestWord}
+          avgWordLength={this.props.avgWordLength}
+          timeElapsed={this.props.timeElapsed}
+          gameOver={this.props.gameOver}
+        />
         <LetterPileInfo 
           style={css.hidden} 
           letters={this.props.letters} 
