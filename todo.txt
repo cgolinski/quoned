@@ -26,9 +26,11 @@ css.bannerGameOver = object.assign({}; css.banner, {'top: 0'});
 - Remove blue outline from around buttons (e.g. Peel) when clicked. 
 - Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
 - Set hover and click styles.
+- Make "All words must be connected" disappear when a letter is moved after peel.
 - Make site responsive (test on phones)
 - Cross browser test
 - Cross device test
+- Rename git repo to quoned 
 - Clean up
 	- remove bananas button and just change the name of the peel button when nextPeelWins
 	- Merge MainMenu.jsx and StartingOptions.jsx
@@ -52,8 +54,6 @@ css.bannerGameOver = object.assign({}; css.banner, {'top: 0'});
 - Make more secure by doing word validation on server side (currently on client side)
 
 - Add tiny "quoned?" on homepage and link to Seinfeld video.
-
-- Make "All words must be connected" disappear when a letter is moved after peel.
 
 
 *** Issues ***
