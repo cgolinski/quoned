@@ -10,6 +10,7 @@ import {findTimeElapsed} from '../helpers/time.js';
 import {findLengthOfLongestWord, findAvgLengthOfWords} from '../helpers/words.js';
 
 
+
 var rowCount = 10;
 var colCount = 10;
 
@@ -54,6 +55,7 @@ class App extends Component {
       showCellErrors: false,
       globalErrors: [],
       gameOver: false,
+      showHelp: false,
       allWords: [],
       wordCount: null,
       longestWord: {
@@ -94,6 +96,12 @@ class App extends Component {
       gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
     });
   }  
+
+  toggleHelp() {
+    this.setState({
+      showHelp: !this.state.showHelp,
+    });
+  }
 
   dragTile(row, column) {
     this.setState({
@@ -209,6 +217,8 @@ class App extends Component {
               longestWord={this.state.longestWord}
               avgWordLength={this.state.avgWordLength}
               timeElapsed={this.state.timeElapsed}
+              showHelp={this.state.showHelp}
+              toggleHelp={this.toggleHelp.bind(this)}
             />
           : <MainMenu
               startGame={this.startGame.bind(this)} 

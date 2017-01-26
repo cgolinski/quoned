@@ -88,7 +88,7 @@ class StartingOptions extends Component {
     this.props.setStartingOption(event.target.name, parseInt(event.target.value));
   }
 
-  renderNumOfPlayersRadioButtons () {
+  renderNumOfPlayersRadioButtons() {
     var maxPlayers = 8;
     var radioButtons = [];
     for (var i = 1; i < maxPlayers + 1; i++) {

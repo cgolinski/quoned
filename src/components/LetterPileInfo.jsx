@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import Help from './Help.jsx';
 import {colors} from '../helpers/colors.js';
-
 
 const css = {
   letterPileInfo: {
@@ -37,6 +37,7 @@ const css = {
     color: colors.white,
     fontWeight: 'bold',
     fontSize: '16px',
+    outline: 'none',
   },
   bananas: {
     display: 'block',
@@ -53,6 +54,23 @@ const css = {
     color: colors.white,
     fontWeight: 'bold',
     fontSize: '16px',
+    outline: 'none',
+  },
+  helpButton: {
+    position: 'absolute',
+    display: 'block',
+    marginBottom: '20px',
+    marginLeft: '10px',
+    padding: '6px 14px',
+    backgroundColor: colors.green,
+    borderRadius: '20px',
+    border: 'none',
+    fontFamily: 'Futura',
+    textTransform: 'uppercase',
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: '18px',
+    outline: 'none',
   },
   hidden: {
     display: 'none',
@@ -104,6 +122,7 @@ class LetterPileInfo extends Component {
     }
     return letterPileImage;
   }
+ 
 
   render() {
     var peelStyles = this.props.nextPeelWins ? css.hidden : css.peel;
@@ -125,6 +144,12 @@ class LetterPileInfo extends Component {
           </div>
         </div>
         <div style={css.infoBottom}>
+          <div>
+            <button style={css.helpButton} onClick={this.props.toggleHelp}>
+              ?
+            </button>
+            <Help showHelp={this.props.showHelp} /> 
+          </div>
           <div style={css.letterPileImage}>
             {this.renderLetterPileImage()}
           </div>

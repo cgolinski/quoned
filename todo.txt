@@ -3,21 +3,23 @@
 Next feature: 
 
 
-
-- Transition-in the game over banner
-
-css = {};
-
-css.banner = {
-	top = '-85%',
-	transition = 'top 0.5s ease-out',
-	color = ...
-};
-
-css.bannerGameOver = object.assign({}; css.banner, {'top: 0'});
-
-<div style={this.props.gameOver ? css.bannerGameOver : css.banner}>
-
+- Help button on game screen that shows rules.
+	"Create words with your letters. When all words are connected, click the LETTER button to get another tile. Incorporate the new letter by rearranging letters into new words where necessary. Use all letters in the letterpile to win."
+	- DONE: button directly in letterPileInfo
+	- DONE: help component contains explanation page, not button
+	- DONE: button makes help component appear (by top transition?)
+		Do in this order:
+		1. DONE: Create function to change style directly in variable  
+		2. DONE: Update function to change state (passed down as prop), if statement to change styles 
+		3. DONE: Update function to transition top, not to change from hidden to active.	 
+		4. DONE: Remove help default and active styles from letterPileInfo and move into help component. 
+			 Move function into help component
+		5. DONE: Style like gameOverBanner.   
+	- DONE: Help page styles go in help component (just like GameOverBanner component)
+	- git branch, add, and commit
+	- Ask Rob how to improve (e.g. toggleHelp and showHelp props)
+	- Ask Rob to improve design
+	- Issue: If you zoom in very big, the off-screen banners show on screen -- move higher up? bottom offset? 
 
 
 

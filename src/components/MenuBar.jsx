@@ -48,6 +48,8 @@ class MenuBar extends Component {
           nextPeelWins={this.props.nextPeelWins} 
           peel={this.props.peel} 
           bananas={this.props.bananas} 
+          showHelp={this.props.showHelp}
+          toggleHelp={this.props.toggleHelp}
         /> 
       </div>
     );
