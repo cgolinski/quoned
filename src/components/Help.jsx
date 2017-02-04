@@ -5,17 +5,19 @@ import {colors} from '../helpers/colors.js';
 const css = {
 }
 
-css.helpBanner =  {
+css.helpBanner = {
   position: 'absolute',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-start',
   alignItems: 'center',
   textAlign: 'left',
   minHeight: '85%',
+  height: '85%',
   width: '80%',
   backgroundColor: colors.darkGreen,
   top: '-85%',
+  overflowY: 'scroll',
   fontSize: '18px',
   fontFamily: 'Futura',
   border: '3px double ' + colors.green,
@@ -28,6 +30,12 @@ css.helpBanner =  {
 
 css.helpBannerShowing = Object.assign({}, css.helpBanner, {top: '-3px',});
 
+css.helpTitle = {
+  fontSize: '20px',
+  paddingBottom: '30px',
+};
+
+
 class Help extends Component {
   static propTypes = {
     
@@ -35,12 +43,14 @@ class Help extends Component {
 
   render() {
     var helpStyles = this.props.showHelp ? css.helpBannerShowing : css.helpBanner;
-    var helpMessage = 'How To Play: Create words with your letters. When all words are connected, click the LETTER button to get another tile. Incorporate the new letter by rearranging letters into new words where necessary. Use all letters in the letterpile to win.';
+    var helpTitle = 'How To Play';
+    var helpMessage = 'Create words with your letters, going left to right or top to bottom. When all words are connected, click the LETTER button to get another tile. Incorporate the new letter by rearranging letters into new words where necessary. Use all letters in the letterpile to win.';
     
     return (        
-      <div style={helpStyles} >
-        {helpMessage}
-      </div>
+        <div style={helpStyles}>
+          <div style={css.helpTitle}>{helpTitle}</div>
+          <div>{helpMessage}</div>
+        </div>
     );
   }
 }

@@ -38,6 +38,7 @@ const css = {
     fontWeight: 'bold',
     fontSize: '16px',
     outline: 'none',
+    cursor: 'pointer',
   },
   bananas: {
     display: 'block',
@@ -55,22 +56,7 @@ const css = {
     fontWeight: 'bold',
     fontSize: '16px',
     outline: 'none',
-  },
-  helpButton: {
-    position: 'absolute',
-    display: 'block',
-    marginBottom: '20px',
-    marginLeft: '10px',
-    padding: '6px 14px',
-    backgroundColor: colors.green,
-    borderRadius: '20px',
-    border: 'none',
-    fontFamily: 'Futura',
-    textTransform: 'uppercase',
-    color: colors.white,
-    fontWeight: 'bold',
-    fontSize: '18px',
-    outline: 'none',
+    cursor: 'pointer',
   },
   hidden: {
     display: 'none',
@@ -145,9 +131,6 @@ class LetterPileInfo extends Component {
         </div>
         <div style={css.infoBottom}>
           <div>
-            <button style={css.helpButton} onClick={this.props.toggleHelp}>
-              ?
-            </button>
             <Help showHelp={this.props.showHelp} /> 
           </div>
           <div style={css.letterPileImage}>

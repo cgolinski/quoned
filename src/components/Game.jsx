@@ -31,6 +31,23 @@ const css = {
   hidden: {
     display: 'none',
   },
+  helpButton: {
+    position: 'absolute',
+    display: 'block',
+    bottom: '20px',
+    right: '20px',
+    padding: '6px 11px',
+    backgroundColor: colors.brown,
+    borderRadius: '20px',
+    border: '2px solid ' + colors.tan,
+    fontFamily: 'Helvetica',
+    textTransform: 'uppercase',
+    color: colors.tan,
+    fontWeight: 'bold',
+    fontSize: '18px',
+    outline: 'none',
+    cursor: 'pointer',
+  },
 };
 
 class Game extends Component {
@@ -55,7 +72,6 @@ class Game extends Component {
           avgWordLength={this.props.avgWordLength}
           timeElapsed={this.props.timeElapsed}
           showHelp={this.props.showHelp}
-          toggleHelp={this.props.toggleHelp}
         />       
         <div style={css.playArea}>
           <div style={css.errorContainer}>
@@ -69,6 +85,9 @@ class Game extends Component {
             dragTile={this.props.dragTile} 
             dropTile={this.props.dropTile} 
           />
+          <button style={css.helpButton} onClick={this.props.toggleHelp}>
+            ?
+          </button>
         </div>
       </div>
     );

@@ -4,7 +4,6 @@ Next feature:
 
 
 - Help button on game screen that shows rules.
-	"Create words with your letters. When all words are connected, click the LETTER button to get another tile. Incorporate the new letter by rearranging letters into new words where necessary. Use all letters in the letterpile to win."
 	- DONE: button directly in letterPileInfo
 	- DONE: help component contains explanation page, not button
 	- DONE: button makes help component appear (by top transition?)
@@ -19,7 +18,20 @@ Next feature:
 	- git branch, add, and commit
 	- Ask Rob how to improve (e.g. toggleHelp and showHelp props)
 	- Ask Rob to improve design
+		// DONE: button moves to bottom right of game screen
+		// DONE: normal brown background, light brown solid border and font color
+		// DONE: change font to Helvetica or another normal looking "?"
 	- Issue: If you zoom in very big, the off-screen banners show on screen -- move higher up? bottom offset? 
+	//NOPE: try -em instead of -px or -%
+	//OR
+	//put inside a div that has 0px height and full width
+	////transition bottom of that container div to 85% height
+	////OR
+	////transition helpbanner bottom might make it show
+	//OR
+	//transition left to right
+	//OR
+	//overflow scroll, height 85%
 
 
 

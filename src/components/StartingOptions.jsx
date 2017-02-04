@@ -37,6 +37,7 @@ const css = {
     fontSize: '16px',
     textAlign: 'center',
     lineHeight: '30px',
+    cursor: 'pointer',
   },
   numOfPlayersFormLabelSelected: {
     display: 'inline-block',
@@ -63,6 +64,7 @@ const css = {
     border: 'none',
     textTransform: 'uppercase',
     fontFamily: 'Futura',
+    cursor: 'pointer',
   },
 }
 

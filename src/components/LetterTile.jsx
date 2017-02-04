@@ -13,11 +13,7 @@ var LetterTileStyle = {
   display: 'inline-block',
   margin: '0px',
   borderRadius: '4px',
-  // -- old colors below --
-  //backgroundColor: '#f9ebc0',
-  //color: '#2b281d',
-  //textShadow: '0px 1px 0px white',
-  //boxShadow: 'inset 1px 1px 3px #ffffd0, inset -1px -1px 3px #d3ca94',
+  cursor: 'move',
 };
 
 class LetterTile extends Component {
