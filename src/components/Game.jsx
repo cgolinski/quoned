@@ -72,6 +72,7 @@ class Game extends Component {
           avgWordLength={this.props.avgWordLength}
           timeElapsed={this.props.timeElapsed}
           showHelp={this.props.showHelp}
+          toggleHelp={this.props.toggleHelp}
         />       
         <div style={css.playArea}>
           <div style={css.errorContainer}>

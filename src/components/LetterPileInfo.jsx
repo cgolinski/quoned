@@ -131,7 +131,7 @@ class LetterPileInfo extends Component {
         </div>
         <div style={css.infoBottom}>
           <div>
-            <Help showHelp={this.props.showHelp} /> 
+            <Help showHelp={this.props.showHelp} toggleHelp={this.props.toggleHelp} /> 
           </div>
           <div style={css.letterPileImage}>
             {this.renderLetterPileImage()}

@@ -25,6 +25,7 @@ css.helpBanner = {
   boxSizing: 'border-box',
   padding: '20px 5px 20px 10px',
   marginLeft: '10%',
+  cursor: 'default',
   transition: 'top 0.8s ease-out',
 };
 
@@ -44,10 +45,10 @@ class Help extends Component {
   render() {
     var helpStyles = this.props.showHelp ? css.helpBannerShowing : css.helpBanner;
     var helpTitle = 'How To Play';
-    var helpMessage = 'Create words with your letters, going left to right or top to bottom. When all words are connected, click the LETTER button to get another tile. Incorporate the new letter by rearranging letters into new words where necessary. Use all letters in the letterpile to win.';
+    var helpMessage = 'Create words with your letters, going from left to right or top to bottom. When all words are connected, click the LETTER button to get another tile. Incorporate the new letter by rearranging letters into new words where necessary. Use all letters in the letterpile to win.';
     
     return (        
-        <div style={helpStyles}>
+        <div style={helpStyles} onClick={this.props.toggleHelp}>
           <div style={css.helpTitle}>{helpTitle}</div>
           <div>{helpMessage}</div>
         </div>

@@ -3,38 +3,6 @@
 Next feature: 
 
 
-- Help button on game screen that shows rules.
-	- DONE: button directly in letterPileInfo
-	- DONE: help component contains explanation page, not button
-	- DONE: button makes help component appear (by top transition?)
-		Do in this order:
-		1. DONE: Create function to change style directly in variable  
-		2. DONE: Update function to change state (passed down as prop), if statement to change styles 
-		3. DONE: Update function to transition top, not to change from hidden to active.	 
-		4. DONE: Remove help default and active styles from letterPileInfo and move into help component. 
-			 Move function into help component
-		5. DONE: Style like gameOverBanner.   
-	- DONE: Help page styles go in help component (just like GameOverBanner component)
-	- git branch, add, and commit
-	- Ask Rob how to improve (e.g. toggleHelp and showHelp props)
-	- Ask Rob to improve design
-		// DONE: button moves to bottom right of game screen
-		// DONE: normal brown background, light brown solid border and font color
-		// DONE: change font to Helvetica or another normal looking "?"
-	- Issue: If you zoom in very big, the off-screen banners show on screen -- move higher up? bottom offset? 
-	//NOPE: try -em instead of -px or -%
-	//OR
-	//put inside a div that has 0px height and full width
-	////transition bottom of that container div to 85% height
-	////OR
-	////transition helpbanner bottom might make it show
-	//OR
-	//transition left to right
-	//OR
-	//overflow scroll, height 85%
-
-
-
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
 - Add favicon
 - Remove blue outline from around buttons (e.g. Peel) when clicked. 
