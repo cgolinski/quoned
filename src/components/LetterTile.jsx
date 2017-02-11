@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import {colors} from '../helpers/colors.js';
 
 var LetterTileStyle = {
+  display: 'flex', 
+  justifyContent: 'center',
+  alignItems: 'center',
   fontSize: '19px',
   fontFamily: 'Futura',
   textTransform: 'uppercase',
   backgroundColor: colors.tan,
   color: colors.darkBrown,
-  width: '75%',
-  height: '75%',
-  paddingTop: '6px',
-  display: 'inline-block',
-  margin: '0px',
+  width: '36px',
+  height: '36px',
+  padding: '0px',
+  margin: '7px',
   borderRadius: '4px',
   cursor: 'move',
 };

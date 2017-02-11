@@ -14,7 +14,8 @@ const css = {
     backgroundColor: colors.pink,
   },
   letter: {
-    fontSize: '24px',
+    //fontSize: '24px',
+    fontSize: '22px',
     fontWeight: 'bold',
   },
 };
