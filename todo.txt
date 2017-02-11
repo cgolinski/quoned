@@ -2,15 +2,15 @@
 
 Next feature: 
 
-
-- Make "All words must be connected" disappear when a letter is moved after peel.
-- Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
-- Add favicon
-- Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
-- Set hover and click styles.
 - Make site responsive (test on phones)
 - Cross browser test
 - Cross device test
+- Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
+	- Drag letter onto dump area
+	- Three more letters automatically appear on board (peel 3)
+- Add favicon
+- Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
+- Set hover and click styles.
 - Rename git repo to quoned 
 - Clean up
 	- remove bananas button and just change the name of the peel button when nextPeelWins

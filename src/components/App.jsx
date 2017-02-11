@@ -103,7 +103,11 @@ class App extends Component {
     });
   }
 
-  dragTile(row, column) {
+  dragTile(row, column, event) {
+    // Firefox requires that some data be set on the dataTransfer object or it will not 
+    // respect the dragStart event. I am setting garbage data here.
+    event.dataTransfer.setData('text/plain', 'garbage');
+    
     this.setState({
       originCell: {
         row: row,
@@ -117,12 +121,6 @@ class App extends Component {
     var destinationCellIsEmpty = letterInDestinationCell === undefined;
     var originCell = this.state.originCell;
     var letterInOriginCell = this.state.gridData[originCell.row][originCell.column].letter;
-
-    /* QUESTIONS: 
-       1) Updating pointer variables, not original state. How to update original state
-          so tile actually moves, while keeping function readable?
-    */
-
 
     if (destinationCellIsEmpty) {
       letterInDestinationCell = letterInOriginCell;
