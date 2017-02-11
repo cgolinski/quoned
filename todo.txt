@@ -3,12 +3,11 @@
 Next feature: 
 
 
+- Make "All words must be connected" disappear when a letter is moved after peel.
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
 - Add favicon
-- Remove blue outline from around buttons (e.g. Peel) when clicked. 
 - Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
 - Set hover and click styles.
-- Make "All words must be connected" disappear when a letter is moved after peel.
 - Make site responsive (test on phones)
 - Cross browser test
 - Cross device test

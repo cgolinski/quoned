@@ -133,10 +133,15 @@ class App extends Component {
         clearErrors(this.state.gridData);
       }
 
+      if (this.state.globalErrors) {
+        this.state.globalErrors = [];
+      }
+
       this.setState({
         originCell: undefined,
         gridData: this.state.gridData,
         showCellErrors: false,
+        globalErrors: this.state.globalErrors,
       });
     }
   }
