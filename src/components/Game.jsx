@@ -33,9 +33,10 @@ const css = {
   },
   helpButton: {
     position: 'absolute',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: 'block',
+    //display: 'flex',
+    //justifyContent: 'center',
+    //alignItems: 'center',
     lineHeight: '0',
     bottom: '20px',
     right: '20px',
