@@ -2,16 +2,25 @@
 
 Next feature: 
 
+- Change Players on homescreen to difficulty level - maybe just swap out label on site and in code
+- 
+- Add favicon
+- Rename git repo to quoned 
+- Grep for "Peel" and Bananas. If <6, rename to something else.
+- Add tiny "quoned?" on homepage and link to Seinfeld video.
+- Fill out ReadMe on React -- see others for what belongs there.
+	To run:
+		1. clone repo
+		2. npm start
+
+
 - Make site responsive (test on phones)
-- Cross browser test
 - Cross device test
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
 	- Drag letter onto dump area
 	- Three more letters automatically appear on board (peel 3)
-- Add favicon
 - Maybe move css away from inline styles to plain css files, so that :hover and media queries will work
 - Set hover and click styles.
-- Rename git repo to quoned 
 - Clean up
 	- remove bananas button and just change the name of the peel button when nextPeelWins
 	- Merge MainMenu.jsx and StartingOptions.jsx
@@ -21,11 +30,12 @@ Next feature:
 
 - Achievements as you go? (5-letter word, 6-letter word, etc. win with <5 words, use certain jargon words, win with no dumping, win in < 5 mins, all words start with same letter, all words longer than 4 letters, )
 
-- Make Futura font or alternate font available on other browser
-- Force number of players to be selected before game starts
-- Connect to server
-- Create one board per player
-- Render small version of other players' boards in each player's view
+- Make multiplayer game
+	- Change difficulty level to number of players
+	- Force number of players to be selected before game starts
+	- Connect to server
+	- Create one board per player
+	- Render small version of other players' boards in each player's view
 
 - Create beginning-of-game options: 
 	- special rules (two letter words allowed? timed? size of grid? number of tiles? pass unused tiles to neighbouring player? peel two letters at once?)
@@ -34,12 +44,9 @@ Next feature:
 
 - Make more secure by doing word validation on server side (currently on client side)
 
-- Add tiny "quoned?" on homepage and link to Seinfeld video.
-
 
 *** Issues ***
 
 - Plus sign briefly flashes as tile starts being dragged.
-- Styles and dragging broken in Firefox
 
 

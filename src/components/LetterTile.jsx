@@ -6,7 +6,7 @@ var LetterTileStyle = {
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: '19px',
-  fontFamily: 'Futura',
+  fontFamily: 'Futura, Helvetica, Arial, sans-serif',
   textTransform: 'uppercase',
   backgroundColor: colors.tan,
   color: colors.darkBrown,

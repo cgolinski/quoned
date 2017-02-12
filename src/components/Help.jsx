@@ -17,9 +17,9 @@ css.helpBanner = {
   width: '80%',
   backgroundColor: colors.darkGreen,
   top: '-85%',
-  overflowY: 'scroll',
+  overflowY: 'auto',
   fontSize: '18px',
-  fontFamily: 'Futura',
+  fontFamily: 'Futura, Helvetica, Arial, sans-serif',
   border: '3px double ' + colors.green,
   borderRadius: '4px',
   boxSizing: 'border-box',
@@ -36,6 +36,9 @@ css.helpTitle = {
   paddingBottom: '30px',
 };
 
+css.helpMessage = {
+  maxWidth: '100%',
+};
 
 class Help extends Component {
   static propTypes = {
@@ -50,7 +53,7 @@ class Help extends Component {
     return (        
         <div style={helpStyles} onClick={this.props.toggleHelp}>
           <div style={css.helpTitle}>{helpTitle}</div>
-          <div>{helpMessage}</div>
+          <div style={css.helpMessage}>{helpMessage}</div>
         </div>
     );
   }

@@ -26,7 +26,7 @@ const css = {
   errors: {
     color: colors.pink,
     padding: '20px',
-    fontFamily: 'Futura',
+    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
   },
   hidden: {
     display: 'none',
