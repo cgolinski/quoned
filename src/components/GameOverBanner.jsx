@@ -4,20 +4,20 @@ import {timePad} from '../helpers/time.js';
 
 var css = {
   gameOver: {
+    borderBottom: '1px solid ' + colors.green,
     display: 'inline-block',
     fontFamily: 'Futura, Helvetica, Arial, sans-serif',
-    textTransform: 'uppercase',
     padding: '0px 0px 10px 0px',
-    borderBottom: '1px solid ' + colors.green,
+    textTransform: 'uppercase',
   },
   stats: {
-    fontSize: '16px',
-    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
-    paddingTop: '10px',
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
+    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    fontSize: '16px',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    paddingTop: '10px',
     top: '0px',
   },
   statsLevel1: {
@@ -26,60 +26,53 @@ var css = {
   statsLevel2: {
     fontSize: '36px',
     fontWeight: 'normal',
-    paddingTop: '3px',
     paddingBottom: '10px',
+    paddingTop: '3px',
   },
   restartButton: {
-    display: 'block',
     backgroundColor: colors.white,
-    borderRadius: '20px',
     border: 'none',
-    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
-    textTransform: 'uppercase',
+    borderRadius: '20px',
     color: colors.darkGreen,
-    fontWeight: 'bold',
+    display: 'block',
+    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
     fontSize: '16px',
-    textDecoration: 'none',
-    padding: '10px 15px',
+    fontWeight: 'bold',
     outline: 'none',
+    padding: '10px 15px',
+    textDecoration: 'none',
+    textTransform: 'uppercase',
   },
 };
 
 css.gameOverBanner = {
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
   alignItems: 'center',
-  textAlign: 'center',
-  minHeight: '85%',
-  height: '85%',
-  width: '80%',
   backgroundColor: colors.darkGreen,
-  top: '-85%',
-  overflowY: 'auto',
-  fontSize: '24px',
-  fontFamily: 'Futura, Helvetica, Arial, sans-serif',
   border: '3px double ' + colors.green,
   borderRadius: '4px',
+  boxShadow: '0px 1px 2px 0px rgba(0, 0, 0, 0.5)',
   boxSizing: 'border-box',
-  padding: '20px 0px 20px 0px',
+  display: 'flex',
+  flexDirection: 'column',
+  fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+  fontSize: '24px',
+  height: '85%',
+  justifyContent: 'space-between',
   marginLeft: '10%',
+  minHeight: '85%',
+  overflowY: 'auto',
+  padding: '20px 0px 20px 0px',
+  position: 'absolute',
+  textAlign: 'center',
+  top: '-85%',
   transition: 'top 0.8s ease-out',
+  width: '80%',
+  zIndex: '1',
 };
 
 css.gameOverBannerShowing = Object.assign({},css.gameOverBanner, {top: '-3px',});
 
 class GameOverBanner extends Component {
-  /*
-  static propTypes = {
-    letters: React.PropTypes.object.isRequired,
-    peel: React.PropTypes.func.isRequired,
-    nextPeelWins: React.PropTypes.bool.isRequired,
-    gameStarted: React.PropTypes.bool.isRequired,
-    gameOver: React.PropTypes.bool.isRequired,
-  };
-  */
 
   renderTimeElapsed() {
     return (
@@ -99,8 +92,8 @@ class GameOverBanner extends Component {
           <span>
             {timePad(this.props.timeElapsed.minutes)}
             <span>:</span>
-           </span> 
-           <span>
+          </span> 
+          <span>
             {timePad(this.props.timeElapsed.seconds)}
           </span>
         </div>

@@ -15,48 +15,48 @@ const css = {
   infoBottom: { 
   },
   gameTitle: {
-    fontSize: '30px',
-    marginTop: '10px',
-    marginBottom: '20px',
-    textAlign: 'center',
     fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    fontSize: '30px',
+    marginBottom: '20px',
+    marginTop: '10px',
+    textAlign: 'center',
     textTransform: 'uppercase',
   },
   peel: {
+    backgroundColor: colors.green,
+    border: 'none',
+    borderRadius: '20px',
+    color: colors.white,
+    cursor: 'pointer',
     display: 'block',
-    width: '80%',
+    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    fontSize: '16px',
+    fontWeight: 'bold',
     height: '40px',
     marginBottom: '20px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: colors.green,
-    borderRadius: '20px',
-    border: 'none',
-    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
-    textTransform: 'uppercase',
-    color: colors.white,
-    fontWeight: 'bold',
-    fontSize: '16px',
     outline: 'none',
-    cursor: 'pointer',
+    textTransform: 'uppercase',
+    width: '80%',
   },
   bananas: {
+    backgroundColor: colors.green,
+    border: 'none',
+    borderRadius: '20px',
+    color: colors.white,
+    cursor: 'pointer',
     display: 'block',
-    width: '80%',
+    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    fontSize: '16px',
+    fontWeight: 'bold',
     height: '40px',
     marginBottom: '20px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: colors.green,
-    borderRadius: '20px',
-    border: 'none',
-    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
-    textTransform: 'uppercase',
-    color: colors.white,
-    fontWeight: 'bold',
-    fontSize: '16px',
     outline: 'none',
-    cursor: 'pointer',
+    textTransform: 'uppercase',
+    width: '80%',
   },
   hidden: {
     display: 'none',
@@ -67,28 +67,28 @@ const css = {
     marginLeft: '500px',
   },
   letterPileImage: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column-reverse',
     marginBottom: '0px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    display: 'flex',
-    flexDirection: 'column-reverse',
-    alignItems: 'center',
   },
   letterTileInPile: {
+    backgroundColor: colors.tan,
     borderTop: '1px solid ' + colors.darkTan,
     height: '8px',
-    width: '50px',
     position: 'relative',
-    backgroundColor: colors.tan,
+    width: '50px',
   },
 }
 
 class LetterPileInfo extends Component {
   static propTypes = {
-    letters: React.PropTypes.object.isRequired,
-    peel: React.PropTypes.func.isRequired,
     bananas: React.PropTypes.func.isRequired,
+    letters: React.PropTypes.object.isRequired,
     nextPeelWins: React.PropTypes.bool.isRequired,
+    peel: React.PropTypes.func.isRequired,
   };
 
   renderLetterPileImage() {
@@ -121,10 +121,10 @@ class LetterPileInfo extends Component {
             Quoned!
           </div>
           <div>
-            <button style={peelStyles} type="button" value="Peel" onClick={this.props.peel}>
+            <button onClick={this.props.peel} style={peelStyles} type="button" value="Peel">
               Letter
             </button>
-            <button style={bananasStyles} type="button" value="Bananas" onClick={this.props.bananas}>
+            <button onClick={this.props.bananas} style={bananasStyles} type="button" value="Bananas">
               Game
             </button>
           </div>

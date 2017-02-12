@@ -29,10 +29,10 @@ class PlayGrid extends Component {
     for (var i = 0; i < this.props.gridData.length; i++) {
       rows.push(
         <PlayGridRow 
-          key={i} 
-          rowData={this.props.gridData[i]} 
           dragTile={this.props.dragTile.bind(null, i)} 
           dropTile={this.props.dropTile.bind(null, i)} 
+          key={i} 
+          rowData={this.props.gridData[i]} 
         />
       );  
     }

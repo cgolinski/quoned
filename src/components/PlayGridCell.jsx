@@ -5,16 +5,15 @@ import {colors} from '../helpers/colors.js';
 const css = {
   playGridCell: {
     border: `2px dashed ${colors.lightBrown}`,
-    width: '50px',
     height: '50px',
-    textAlign: 'center',
     padding: '0px',
+    textAlign: 'center',
+    width: '50px',
   },
   error: {
     backgroundColor: colors.pink,
   },
   letter: {
-    //fontSize: '24px',
     fontSize: '22px',
     fontWeight: 'bold',
   },
@@ -49,15 +48,15 @@ class PlayGridCell extends Component {
   render() {
     return (
       <td 
-        style={this.getCellCss()} 
-        onDrop={this.dropHandler.bind(this)} 
         onDragOver={this.dragOverHandler.bind(this)}
+        onDrop={this.dropHandler.bind(this)} 
+        style={this.getCellCss()} 
       >
         {this.props.cellData.letter === undefined ? null : 
           <span style={css.letter}>
             <LetterTile 
-              letter={this.props.cellData.letter}
               dragTile={this.props.dragTile}
+              letter={this.props.cellData.letter}
             />
           </span> 
         }

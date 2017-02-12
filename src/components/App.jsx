@@ -10,13 +10,12 @@ import {findTimeElapsed} from '../helpers/time.js';
 import {findLengthOfLongestWord, findAvgLengthOfWords} from '../helpers/words.js';
 
 
-
 var rowCount = 10;
 var colCount = 10;
 
 //const ALL_LETTERS = 'cat';
 //const ALL_LETTERS = 'appleeachperlum';
-const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnoooooooooopppqqrrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
+const ALL_LETTERS = 'aaaaaaaaaaaaabbbcccddddddeeeeeeeeeeeeeeeeeefffgggghhhiiiiiiiiiiiijjkklllllmmmnnnnnnnnooooooooooppprrrrrrrrrsssssstttttttttuuuuuuvvvwwwxxyyyzz';
 
 const css = {
   App: {
@@ -25,18 +24,14 @@ const css = {
 };
 
 const NUMBER_OF_STARTING_TILES = {
-  1: 21,
-  2: 21,
-  3: 21,
-  4: 21,
-  5: 15,
-  6: 15,
-  7: 11,
-  8: 11
+  1: 21, 
+  2: 18, 
+  3: 15,
+  4: 11 
 };
 
-function startingTilesPerPlayer(numOfPlayers) {
-  return NUMBER_OF_STARTING_TILES[numOfPlayers];
+function startingTiles(difficulty) {
+  return NUMBER_OF_STARTING_TILES[difficulty];
 }
 
 class App extends Component {
@@ -44,28 +39,28 @@ class App extends Component {
     super(props);
 
     this.state = {
-      letterPile: new LetterPile(ALL_LETTERS.split('')),
-      gridData: null,
-      nextPeelWins: false,
-      originCell: undefined,
-      showStartingOptions: true,
-      showLetterPileInfo: false,
-      gameStarted: false,
-      numOfPlayers: null,
-      showCellErrors: false,
-      globalErrors: [],
-      gameOver: false,
-      showHelp: false,
       allWords: [],
-      wordCount: null,
+      avgWordLength: null,
+      difficulty: null,
+      endTime: null,
+      gameOver: false,
+      gameStarted: false,
+      globalErrors: [],
+      gridData: null,
+      letterPile: new LetterPile(ALL_LETTERS.split('')),
       longestWord: {
         word: null,
         length: null,
       },
-      avgWordLength: null,
+      nextPeelWins: false,
+      originCell: undefined,
+      showCellErrors: false,
+      showHelp: false,
+      showLetterPileInfo: false,
+      showStartingOptions: true,
       startTime: null,
-      endTime: null,
       timeElapsed: null,
+      wordCount: null,
     }; 
   }
 
@@ -77,23 +72,22 @@ class App extends Component {
 
   startGame() {
     this.state.gameOver ? this.state.letterPile = new LetterPile(ALL_LETTERS.split('')) : null;
-    var startingLetters = createStartingHand(startingTilesPerPlayer(this.state.numOfPlayers), this.state.letterPile);
+    var startingLetters = createStartingHand(startingTiles(this.state.difficulty), this.state.letterPile);
 
     var startTime = new Date();
     //only updates states that are not persistent for restarted games
     this.setState({
+      gameOver: false,
+      gameStarted: true,
+      globalErrors: [],
+      gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
+      letterPile: this.state.letterPile,
       nextPeelWins: false,
       originCell: undefined,
-      showStartingOptions: true,
-      showLetterPileInfo: true,
-      gameStarted: true,
       showCellErrors: false,
-      globalErrors: [],
-      gameOver: false,
-
+      showLetterPileInfo: true,
+      showStartingOptions: true,
       startTime: startTime,
-      letterPile: this.state.letterPile,
-      gridData: fillGridData(createGridData(rowCount, colCount), startingLetters),
     });
   }  
 
@@ -110,8 +104,8 @@ class App extends Component {
     
     this.setState({
       originCell: {
-        row: row,
         column: column,
+        row: row,
       }
     });
   }
@@ -136,10 +130,10 @@ class App extends Component {
       }
 
       this.setState({
-        originCell: undefined,
-        gridData: this.state.gridData,
-        showCellErrors: false,
         globalErrors: this.state.globalErrors,
+        gridData: this.state.gridData,
+        originCell: undefined,
+        showCellErrors: false,
       });
     }
   }
@@ -168,11 +162,11 @@ class App extends Component {
     }
 
     this.setState({
-      gridData: this.state.gridData,
-      nextPeelWins: this.state.letterPile.count() < this.state.numOfPlayers,
-      showCellErrors: true,
-      globalErrors: globalErrors,
       allWords: allWords,
+      globalErrors: globalErrors,
+      gridData: this.state.gridData,
+      nextPeelWins: this.state.letterPile.count() < this.state.difficulty,
+      showCellErrors: true,
       wordCount: allWords.length,
     });
   }
@@ -192,11 +186,11 @@ class App extends Component {
     var timeElapsed = findTimeElapsed(this.state.startTime, this.state.endTime);
 
     this.setState({
-      gameOver: true,
-      endTime : this.state.endTime,
-      timeElapsed: timeElapsed,
-      longestWord: longestWord,
       avgWordLength: avgWordLength,
+      endTime : this.state.endTime,
+      gameOver: true,
+      longestWord: longestWord,
+      timeElapsed: timeElapsed,
     });
   }
 
@@ -206,27 +200,27 @@ class App extends Component {
         {
           this.state.gameStarted
           ? <Game 
-              gameOver={this.state.gameOver} 
-              letters={this.state.letterPile}
-              nextPeelWins={this.state.nextPeelWins} 
-              peel={this.peel.bind(this)} 
+              avgWordLength={this.state.avgWordLength}
               bananas={this.bananas.bind(this)} 
-              globalErrors={this.state.globalErrors}
-              gridData={this.state.gridData} 
               dragTile={this.dragTile.bind(this)} 
               dropTile={this.dropTile.bind(this)}
-              startGame={this.startGame.bind(this)}
-              wordCount={this.state.wordCount}
+              gameOver={this.state.gameOver} 
+              globalErrors={this.state.globalErrors}
+              gridData={this.state.gridData} 
+              letters={this.state.letterPile}
               longestWord={this.state.longestWord}
-              avgWordLength={this.state.avgWordLength}
-              timeElapsed={this.state.timeElapsed}
+              nextPeelWins={this.state.nextPeelWins} 
+              peel={this.peel.bind(this)} 
               showHelp={this.state.showHelp}
+              startGame={this.startGame.bind(this)}
+              timeElapsed={this.state.timeElapsed}
               toggleHelp={this.toggleHelp.bind(this)}
+              wordCount={this.state.wordCount}
             />
           : <MainMenu
-              startGame={this.startGame.bind(this)} 
-              numOfPlayers={this.state.numOfPlayers}
+              difficulty={this.state.difficulty}
               setStartingOption={this.setStartingOption.bind(this)}
+              startGame={this.startGame.bind(this)} 
             />
         }
       </div>  

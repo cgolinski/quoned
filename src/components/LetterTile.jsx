@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import {colors} from '../helpers/colors.js';
 
 var LetterTileStyle = {
-  display: 'flex', 
-  justifyContent: 'center',
   alignItems: 'center',
-  fontSize: '19px',
-  fontFamily: 'Futura, Helvetica, Arial, sans-serif',
-  textTransform: 'uppercase',
   backgroundColor: colors.tan,
-  color: colors.darkBrown,
-  width: '36px',
-  height: '36px',
-  padding: '0px',
-  margin: '7px',
   borderRadius: '4px',
+  color: colors.darkBrown,
   cursor: 'move',
+  display: 'flex', 
+  fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+  fontSize: '19px',
+  height: '36px',
+  justifyContent: 'center',
+  margin: '7px',
+  padding: '0px',
+  textTransform: 'uppercase',
+  width: '36px',
 };
 
 class LetterTile extends Component {

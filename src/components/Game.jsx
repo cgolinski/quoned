@@ -13,45 +13,42 @@ const css = {
     height: '100%',
   },
   playArea: {
-    display: 'flex',
-    flex: '6',
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.brown,
+    display: 'flex',
+    flex: '6',
     flexDirection: 'column',
+    justifyContent: 'center',
   },
   errorContainer: {
     height: '60px',  
   },
   errors: {
     color: colors.pink,
-    padding: '20px',
     fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    padding: '20px',
   },
   hidden: {
     display: 'none',
   },
   helpButton: {
-    position: 'absolute',
-    display: 'block',
-    //display: 'flex',
-    //justifyContent: 'center',
-    //alignItems: 'center',
-    lineHeight: '0',
-    bottom: '20px',
-    right: '20px',
-    height: '2em',
-    width: '2em',
     backgroundColor: colors.brown,
-    borderRadius: '20px',
     border: '2px solid ' + colors.tan,
-    fontFamily: 'Helvetica',
-    textTransform: 'uppercase',
+    borderRadius: '20px',
+    bottom: '20px',
     color: colors.tan,
-    fontWeight: 'bold',
-    fontSize: '18px',
-    outline: 'none',
     cursor: 'pointer',
+    display: 'block',
+    fontFamily: 'Helvetica',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    height: '2em',
+    lineHeight: '0',
+    outline: 'none',
+    position: 'absolute',
+    right: '20px',
+    textTransform: 'uppercase',
+    width: '2em',
   },
 };
 
@@ -66,18 +63,18 @@ class Game extends Component {
     return (
       <div style={css.wholeGame}>
         <MenuBar 
-          letters={this.props.letters}
-          nextPeelWins={this.props.nextPeelWins} 
-          peel={this.props.peel} 
+          avgWordLength={this.props.avgWordLength}
           bananas={this.props.bananas} 
           gameOver={this.props.gameOver} 
-          startGame={this.props.startGame}
-          wordCount={this.props.wordCount}
+          letters={this.props.letters}
           longestWord={this.props.longestWord}
-          avgWordLength={this.props.avgWordLength}
-          timeElapsed={this.props.timeElapsed}
+          nextPeelWins={this.props.nextPeelWins} 
+          peel={this.props.peel} 
           showHelp={this.props.showHelp}
+          startGame={this.props.startGame}
+          timeElapsed={this.props.timeElapsed}
           toggleHelp={this.props.toggleHelp}
+          wordCount={this.props.wordCount}
         />       
         <div style={css.playArea}>
           <div style={css.errorContainer}>
@@ -86,10 +83,10 @@ class Game extends Component {
             </div>
           </div>
           <PlayGrid 
-            id="playArea" 
-            gridData={this.props.gridData} 
             dragTile={this.props.dragTile} 
             dropTile={this.props.dropTile} 
+            gridData={this.props.gridData} 
+            id="playArea" 
           />
           <button style={css.helpButton} onClick={this.props.toggleHelp}>
             ?

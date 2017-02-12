@@ -7,15 +7,15 @@ import {colors} from '../helpers/colors.js';
 
 var css = {
   menuBar: {
+    backgroundColor: colors.grey,
+    border: 'none',
+    color: colors.white,
     display: 'flex',
     flex: '2',
     flexFlow: 'column', 
-    color: colors.white,
     fontSize: '18px',
-    border: 'none',
-    backgroundColor: colors.grey,
-    minWidth: '100px', 
     marginLeft: '0px',
+    minWidth: '100px', 
     position: 'relative',
   },
   hidden: {
@@ -25,31 +25,31 @@ var css = {
 
 class MenuBar extends Component {
   static propTypes = {
-    letters: React.PropTypes.object.isRequired,
-    peel: React.PropTypes.func.isRequired,
-    nextPeelWins: React.PropTypes.bool.isRequired,
     gameOver: React.PropTypes.bool.isRequired,
+    letters: React.PropTypes.object.isRequired,
+    nextPeelWins: React.PropTypes.bool.isRequired,
+    peel: React.PropTypes.func.isRequired,
   };
 
   render() {
     return (
       <div style={css.menuBar}>
         <GameOverBanner 
-          startGame={this.props.startGame} 
-          wordCount={this.props.wordCount}
-          longestWord={this.props.longestWord}
           avgWordLength={this.props.avgWordLength}
-          timeElapsed={this.props.timeElapsed}
           gameOver={this.props.gameOver}
+          longestWord={this.props.longestWord}
+          startGame={this.props.startGame} 
+          timeElapsed={this.props.timeElapsed}
+          wordCount={this.props.wordCount}
         />
         <LetterPileInfo 
-          style={css.hidden} 
+          bananas={this.props.bananas} 
           letters={this.props.letters} 
           nextPeelWins={this.props.nextPeelWins} 
           peel={this.props.peel} 
-          bananas={this.props.bananas} 
-          toggleHelp={this.props.toggleHelp}
           showHelp={this.props.showHelp}
+          style={css.hidden} 
+          toggleHelp={this.props.toggleHelp}
         /> 
       </div>
     );

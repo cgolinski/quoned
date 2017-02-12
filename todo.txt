@@ -2,8 +2,6 @@
 
 Next feature: 
 
-- Change Players on homescreen to difficulty level - maybe just swap out label on site and in code
-- 
 - Add favicon
 - Rename git repo to quoned 
 - Grep for "Peel" and Bananas. If <6, rename to something else.
@@ -17,6 +15,7 @@ Next feature:
 - Make site responsive (test on phones)
 - Cross device test
 - Dump feature: put 1 letter back in LetterPile, pull 3 more from LetterPile
+	- Add two Qs back into letterPile (removed because blocks game without dump feature)
 	- Drag letter onto dump area
 	- Three more letters automatically appear on board (peel 3)
 - Maybe move css away from inline styles to plain css files, so that :hover and media queries will work

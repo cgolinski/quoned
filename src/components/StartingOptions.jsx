@@ -8,63 +8,63 @@ const css = {
     display: 'none',
   },
   gameTitle: {
+    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
     fontSize: '60px',
-    textTransform: 'uppercase',
     paddingBottom: '30px',
     textAlign: 'center',
-    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    textTransform: 'uppercase',
   },
   startingOptionsForm: {
-    textAlign: 'center',
     fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    textAlign: 'center',
   },
-  numOfPlayersForm: {
-    borderTop: '3px double ' + colors.tan,
+  difficultyForm: {
     borderBottom: '3px double ' + colors.tan,
+    borderTop: '3px double ' + colors.tan,
   },
-  numOfPlayersFormInput: {
+  difficultyFormInput: {
     display: 'none',
   },
-  numOfPlayersFormLabel: {
-    display: 'inline-block',
+  difficultyFormLabel: {
     backgroundColor: colors.brown,
     border: '2px solid ' + colors.tan,
-    margin: '0px 5px 25px 5px',
-    height: '30px',
-    width: '30px', 
     borderRadius: '17px',
+    cursor: 'pointer',
+    display: 'inline-block',
     fontFamily: 'Futura, Helvetica, Arial, sans-serif',
     fontSize: '16px',
-    textAlign: 'center',
-    lineHeight: '30px',
-    cursor: 'pointer',
-  },
-  numOfPlayersFormLabelSelected: {
-    display: 'inline-block',
-    backgroundColor: colors.tan,
-    color: colors.brown,
-    border: '1px solid ' + colors.tan,
-    margin: '0px 5px 25px 5px',
     height: '30px',
+    lineHeight: '30px',
+    margin: '0px 5px 25px 5px',
+    textAlign: 'center',
     width: '30px', 
+  },
+  difficultyFormLabelSelected: {
+    backgroundColor: colors.tan,
+    border: '1px solid ' + colors.tan,
     borderRadius: '17px',
+    color: colors.brown,
+    display: 'inline-block',
     fontFamily: 'Futura, Helvetica, Arial, sans-serif',
     fontSize: '16px',
     fontWeight: 'bold',
-    textAlign: 'center',
+    height: '30px',
     lineHeight: '30px',
+    margin: '0px 5px 25px 5px',
+    textAlign: 'center',
+    width: '30px', 
   },
   startGame: {
     backgroundColor: colors.green,
-    color: colors.white,
-    fontSize: '20px',
-    padding: '4px 20px 4px 20px',
-    margin: '45px',
-    borderRadius: '20px',
     border: 'none',
-    textTransform: 'uppercase',
-    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    borderRadius: '20px',
+    color: colors.white,
     cursor: 'pointer',
+    fontFamily: 'Futura, Helvetica, Arial, sans-serif',
+    fontSize: '20px',
+    margin: '45px',
+    padding: '4px 20px 4px 20px',
+    textTransform: 'uppercase',
   },
 }
 
@@ -90,14 +90,14 @@ class StartingOptions extends Component {
     this.props.setStartingOption(event.target.name, parseInt(event.target.value));
   }
 
-  renderNumOfPlayersRadioButtons() {
-    var maxPlayers = 8;
+  renderDifficultyRadioButtons() {
+    var maxDifficulty = 4;
     var radioButtons = [];
-    for (var i = 1; i < maxPlayers + 1; i++) {
-      let labelStyle = i === this.props.numOfPlayers ? css.numOfPlayersFormLabelSelected : css.numOfPlayersFormLabel;
+    for (var i = 1; i < maxDifficulty + 1; i++) {
+      let labelStyle = i === this.props.difficulty ? css.difficultyFormLabelSelected : css.difficultyFormLabel;
       radioButtons.push (
         <span key={i-1}>
-          <input style={css.numOfPlayersFormInput} type="radio" name="numOfPlayers" id={"p"+i} value={i} onClick={this.handleOnClick.bind(this)}/>
+          <input style={css.difficultyFormInput} type="radio" name="difficulty" id={"p"+i} value={i} onClick={this.handleOnClick.bind(this)}/>
           <label style={labelStyle} htmlFor={"p"+i}>{i}</label>
         </span>
       );
@@ -112,9 +112,9 @@ class StartingOptions extends Component {
           Quoned!
         </div>
         <form style={css.startingOptionsForm} onSubmit={this.handleSubmit}>
-          <div style={css.numOfPlayersForm}>
-            <p>Players:</p>
-            {this.renderNumOfPlayersRadioButtons()}  
+          <div style={css.difficultyForm}>
+            <p>Difficulty Level:</p>
+            {this.renderDifficultyRadioButtons()}  
           </div>              
           <input style={css.startGame} type="submit" value="Play" />
         </form>

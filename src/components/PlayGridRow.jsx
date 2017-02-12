@@ -19,10 +19,10 @@ class PlayGridRow extends Component {
     for (var i = 0; i < this.props.rowData.length; i++) {
       columns.push(
         <PlayGridCell 
-          key={i} 
           cellData={this.props.rowData[i]} 
           dragTile={this.props.dragTile.bind(null, i)} 
           dropTile={this.props.dropTile.bind(null, i)} 
+          key={i} 
         />
       );
     }
