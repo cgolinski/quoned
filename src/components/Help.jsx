@@ -25,7 +25,7 @@ css.helpBanner = {
   padding: '20px 5px 20px 10px',
   position: 'absolute',
   textAlign: 'left',
-  top: '-85%',
+  top: '-86%',
   transition: 'top 0.8s ease-out',
   width: '80%',
   zIndex: '1',
