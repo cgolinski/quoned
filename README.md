@@ -7,5 +7,6 @@ Single-player reimplementation of a Scrabble-like board game. Built in React, We
 To run:
 
 ```
+npm install
 npm start
 ```
